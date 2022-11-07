@@ -1,0 +1,30 @@
+@use './variables';
+
+@mixin btn-movebike() {
+    border-radius: 1000px;
+    border: 1px solid variables.$orange-900;
+
+    &.contained {
+        background-color: variables.$orange-900;
+        color: variables.$white!important;
+        
+        &:hover{
+            background-color: transparent;
+            color: variables.$orange-900!important;
+            border: 1px solid variables.$orange-900;
+        }
+    }
+
+    &.outlined {
+        background-color: transparent;
+        color: variables.$orange-900;
+        border: 1px solid variables.$orange-900;
+
+        &:hover {
+            background-color: variables.$orange-900;
+            color: variables.$white!important;
+        }
+
+    }
+}
+
