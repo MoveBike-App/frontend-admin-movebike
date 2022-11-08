@@ -1,3 +1,10 @@
 @use './abstract/variables';
 @use './abstract/mixins';
-@use './abstract/base'
+@use './abstract/base';
+
+// Components
+@use './components/buttons';
+
+// Pages
+@use './pages/index';
+

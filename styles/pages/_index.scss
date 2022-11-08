@@ -1,0 +1,39 @@
+@use "../abstract/variables";
+
+.login-section {
+  background-color: variables.$gray-background;
+  &__bg {
+    background-image: linear-gradient(
+        80deg,
+        rgba(255, 255, 255, 0.6),
+        rgba(255, 255, 255, 0)
+      ),
+      url("../../public/assets/images/login-admin-bg.webp");
+    background-repeat: no-repeat;
+    height: 720px;
+    background-size: cover;
+  }
+}
+
+.login-card {
+  width: 80%;
+  height: 90%;
+  border-radius: 15px;
+  background-color: variables.$white-background;
+  &__checkbox {
+    font-weight: 100;
+    font-size: 12px;
+  }
+  &__input {
+    border-radius: 1000px;
+    border: 1px solid variables.$orange-900;
+    &:focus{
+            color: #212529;
+            background-color: #fff;
+            border-color: rgb(252 112 95 / 25%);
+            outline: 0;
+            box-shadow: 0 0 0 0.15rem rgb(252 112 95 / 25%);
+        
+    }
+  }
+}
