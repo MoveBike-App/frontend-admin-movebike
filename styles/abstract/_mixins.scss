@@ -7,11 +7,18 @@
     &.contained {
         background-color: variables.$orange-900;
         color: variables.$white!important;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        
         
         &:hover{
             background-color: transparent;
             color: variables.$orange-900!important;
             border: 1px solid variables.$orange-900;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
     }
 
