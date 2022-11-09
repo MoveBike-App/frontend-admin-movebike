@@ -11,11 +11,11 @@ export default function LoginCard () {
             <form>
               <Input title='Usuario' />
               <Input title='Contraseña' type='password' />
-              <div class='mb-3 mt-4 form-check'>
-                <input type='checkbox' class='form-check-input' id='exampleCheck1' />
-                <label class='form-check-label login-card__checkbox' for='exampleCheck1'>Recuérdame</label>
+              <div className='mb-3 mt-4 form-check'>
+                <input type='checkbox' className='form-check-input' id='exampleCheck1' />
+                <label className='form-check-label login-card__checkbox' htmlFor='exampleCheck1'>Recuérdame</label>
               </div>
-              <button type='submit' class='btn btn-movebike contained shadow login-card__btn w-100 mb-5'>Iniciar sesión</button>
+              <button type='submit' className='btn btn-movebike contained shadow login-card__btn w-100 mb-5'>Iniciar sesión</button>
             </form>
           </div>
         </div>
