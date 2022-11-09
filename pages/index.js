@@ -3,16 +3,15 @@ import Image from 'next/image'
 
 export default function Login () {
   return (
-    <section className='container-fluid login-section' id='login'>
-      <section className='container mx-auto'>
+    <main className='container-fluid login-section login-section__card-bg' id='login'>
+      <section className='container'>
         <div className='row align-items-center'>
-          <div className='col-6'>
+          <div className='col 12 col-lg-6'>
             <div className="text-center">
           <Image
-          className='mt-5 mb-5'
+          className='mt-5 mb-5 login-section__logo'
           src='/assets/logos/logo-movebike-black.webp'
-          alt='Logo footer'
-          layout='filla'
+          alt='Logo main'
           width={160}
           height={45}
         />
@@ -21,9 +20,9 @@ export default function Login () {
               <LoginCard />
             </div>
           </div>
-          <div className='col-6 login-section__bg' />
+          <div className='col-12 col-lg-6 login-section__bg d-none d-lg-block' />
         </div>
       </section>
-    </section>
+    </main>
   )
 }

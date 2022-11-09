@@ -1,7 +1,48 @@
 @use "../abstract/variables";
+@use "../abstract/mixins";
 
 .login-section {
   background-color: variables.$gray-background;
+  height: 100vh;
+
+  &__logo {
+    transform: translateY(80%);
+    transition-property: all;
+    transition-duration: 2s;
+    transition-timing-function: linear;
+    transition: background-color 100ms, opacity 2s;
+    transition: transform 1s;
+
+    &:hover {
+      background-color: cyan;
+      transform: scale(1.1);
+    }
+    @include mixins.responsive(variables.$medium) {
+      transform: translateY(120%);
+      width: 280px;
+      height: 75px;
+    }
+    @include mixins.responsive(variables.$large) {
+      transform: translateY(-135%);
+      width: 160px;
+      height: 45px;
+    }
+  }
+  &__card-bg {
+    background-image: linear-gradient(
+        80deg,
+        rgba(255, 255, 255, 0.6),
+        rgba(255, 255, 255, 0)
+      ),
+      url("../../public/assets/images/login-admin-bg.webp");
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-size: cover;
+    @include mixins.responsive(variables.$large) {
+      background-image: none;
+    }
+  }
+
   &__bg {
     background-image: linear-gradient(
         80deg,
@@ -10,30 +51,46 @@
       ),
       url("../../public/assets/images/login-admin-bg.webp");
     background-repeat: no-repeat;
-    height: 720px;
+    height: 100vh;
+    margin-right: 0px;    
     background-size: cover;
   }
 }
 
 .login-card {
-  width: 80%;
-  height: 90%;
+  max-width: 400px;
+  height: auto;
   border-radius: 15px;
   background-color: variables.$white-background;
+  transform: translateY(10%);
+  opacity: 0.93;
+
+  @include mixins.responsive(variables.$medium) {
+    transform: translateY(50%);
+  }
+
+  @include mixins.responsive(variables.$large) {
+    transform: translateY(-15%);
+    opacity: none;
+  }
+
   &__checkbox {
     font-weight: 100;
     font-size: 12px;
   }
-  &__input {
-    border-radius: 1000px;
-    border: 1px solid variables.$orange-900;
-    &:focus{
-            color: #212529;
-            background-color: #fff;
-            border-color: rgb(252 112 95 / 25%);
-            outline: 0;
-            box-shadow: 0 0 0 0.15rem rgb(252 112 95 / 25%);
-        
+
+  &__box {
+    &:focus {
+      color: #212529;
+      background-color: white;
+      border-color: rgb(252 112 95 / 25%);
+      outline: 0;
+      box-shadow: 0 0 0 0.15rem rgb(252 112 95 / 25%);
+    }
+    &:checked {
+      background-color: rgb(252 112 95 / 90%);
+      border-color: rgb(252 112 95 / 25%);
+      outline: 0;
     }
   }
 }

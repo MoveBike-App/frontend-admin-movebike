@@ -1,0 +1,4 @@
+@use '../abstract//mixins';
+.input {
+    @include mixins.input;
+}

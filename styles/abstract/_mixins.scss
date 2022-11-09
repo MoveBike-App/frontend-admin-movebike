@@ -35,3 +35,54 @@
     }
 }
 
+@mixin input(){
+        border-radius: 1000px;
+        border: 1px solid variables.$orange-900;
+        &:focus{
+                color: #212529;
+                background-color: #fff;
+                border-color: rgb(252 112 95 / 25%);
+                outline: 0;
+                box-shadow: 0 0 0 0.15rem rgb(252 112 95 / 25%);
+            
+        }
+      }
+
+
+@mixin responsive($breakpoint) {
+    @if ($breakpoint ==variables.$small) {
+        @media screen and (min-width: variables.$small) {
+            @content;
+        }
+    }
+
+    @if ($breakpoint ==variables.$medium) {
+        @media screen and (min-width: variables.$medium) {
+            @content;
+        }
+    }
+
+    @if ($breakpoint ==variables.$large) {
+        @media screen and (min-width: variables.$large) {
+            @content;
+        }
+    }
+
+    @if ($breakpoint ==variables.$extra-large) {
+        @media screen and (min-width: variables.$extra-large) {
+            @content;
+        }
+    }
+
+    @if ($breakpoint ==variables.$extra-extra-large) {
+        @media screen and (min-width: variables.$extra-extra-large) {
+            @content;
+        }
+    }
+
+    @if ($breakpoint ==variables.$extra-4k) {
+        @media screen and (min-width: variables.$extra-4k) {
+            @content;
+        }
+    }
+}
