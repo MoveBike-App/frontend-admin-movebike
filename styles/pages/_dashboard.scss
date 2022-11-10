@@ -1,0 +1,17 @@
+@use '../abstract/variables';
+@use '../abstract/mixins';
+.dashboard-content {
+    transition: all 0.8s ease;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+
+    @include mixins.responsive(variables.$medium) {
+        width: calc(100vw - 70px);
+        margin-left: 70px;
+
+        &.actived {
+            width: calc(100vw - 200px);
+            margin-left: 200px;
+        }
+    }
+}
