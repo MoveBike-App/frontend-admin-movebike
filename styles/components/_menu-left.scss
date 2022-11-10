@@ -1,0 +1,59 @@
+@use '../abstract/variables';
+@use '../abstract/mixins';
+.menu-left {
+  height: 100vh;
+  background-color: variables.$orange-900;
+  width: 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.32);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 16px;
+  transition: width 0.8s ease;
+
+  &.actived {
+    width: 200px;
+    .menu-left__option {
+      width: 150px;
+
+      p {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__hamburger {
+    margin-bottom: 48px;
+    cursor: pointer;
+  }
+
+  &__option {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    width: 40px;
+    height: 32px;
+    transition: width 0.8s ease;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+      background: #C43F35;
+    }
+    p {
+      opacity: 0;
+      color: variables.$white;
+      transition: opacity 0.8s ease;
+      margin: 0 0 0 8px;
+    }
+
+    &.active {
+      background: #C43F35;
+    }
+  }
+}

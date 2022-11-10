@@ -1,0 +1,56 @@
+@use '../abstract/variables';
+@use '../abstract/mixins';
+.nav-dashboard {
+    width: 100vw;
+    height: 60px;
+    background-color: variables.$orange-900;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 32px;
+    
+    p {
+        margin: 0;
+    }
+
+    &__profile {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 60%;
+        color: variables.$white;
+
+        p {
+            font-family: variables.$font-lato;
+            span {
+                font-weight: 500;
+            }
+        }
+
+
+        .fa-bell, .fa-sign-out-alt, .fa-chevron-down {
+            font-size: 16px;
+            color: variables.$white;
+        }
+
+        .avatar {
+            margin: 0 8px 0 32px;
+        }
+
+        @include mixins.responsive(variables.$medium) {
+            .notifications-logout {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                width: 136px;
+                height: 48px;
+                border-radius: 12px;
+                background-color: variables.$white;
+                margin-left: 48px;
+                .fa-bell, .fa-sign-out-alt {
+                    color: variables.$orange-600;
+                }
+            }
+        }
+    }
+}
