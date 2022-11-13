@@ -1,0 +1,71 @@
+@use '../abstract/variables';
+@use '../abstract/mixins';
+
+.general{
+    &__cardAmount{
+        border:none;
+        border-radius: 20px ;
+        max-width: 195px;
+    }
+   &__amount{
+    color: variables.$black-700;
+
+   }
+    &__cardFooter{
+        justify-content: center;
+        transition: all .5s ease;
+        border-radius: 0 0 20px 20px !important;
+
+        &:hover{
+            background-color:variables.$orange-900;
+            opacity: .9;
+            color: white;
+            transition: all .5s ease;
+
+        }
+    }
+    &__cardInfo{
+        color: variables.$black-700;
+        text-decoration-color: black;
+        letter-spacing: .5px;
+        transition: all .5s ease;
+        &:hover{
+            color: white;
+            transition: all .5s ease;
+
+        }
+    }
+&__cardTopRental{
+   max-width: 700px;
+    background-color: variables.$gray-background;
+    letter-spacing: .4px;
+    border-radius: 0 20px 20px 0;
+   border:none;
+    &:hover{
+        border-left-color: variables.$orange-900;
+        border-left-width: 4px;
+        border-left-style: solid;
+    }
+}
+
+&__search{
+    border-radius: 20px;
+    border:none;
+    max-width: fit-content;
+    margin-top: 200px;
+}
+&__glass{
+    color: variables.$orange-900;
+}
+&__searchInput{
+    border-color: variables.$orange-900 !important;
+    box-shadow: 0 0 0 0.15rem rgba(254, 95, 59, .3);
+    border-radius: 8px;
+}
+&__datepicker{
+    border: none;
+    max-width: fit-content;
+    border-radius: 20px;
+}
+
+}

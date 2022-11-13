@@ -7,15 +7,15 @@ export default function Login () {
       <section className='container'>
         <div className='row align-items-center'>
           <div className='col 12 col-lg-6'>
-            <div className="text-center">
-          <Image
-          className='mt-5 mb-5 login-section__logo'
-          src='/assets/logos/logo-movebike-black.webp'
-          alt='Logo main'
-          width={160}
-          height={45}
-        />
-        </div>
+            <div className='text-center'>
+              <Image
+                className='mt-5 mb-5 login-section__logo'
+                src='/assets/logos/logo-movebike-black.webp'
+                alt='Logo main'
+                width={160}
+                height={45}
+              />
+            </div>
             <div className='container-fluid'>
               <LoginCard />
             </div>

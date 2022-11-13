@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import LayoutDashboard from '../LayoutDashboard'
+import General from './General'
 
-export default function Dashboard() {
-    const [isActiveMenu, setIsActiveMenu] = useState(false)
+export default function Dashboard () {
+  const [isActiveMenu, setIsActiveMenu] = useState(false)
 
   const handleClick = optionSelected => {
     const containerContents = document.getElementsByClassName('dashboard-content__section')
@@ -19,7 +20,7 @@ export default function Dashboard() {
   }
   return (
     <LayoutDashboard>
-        <nav className={isActiveMenu ? 'menu-left actived d-none d-md-block' : 'menu-left d-none d-md-block'}>
+      <nav className={isActiveMenu ? 'menu-left actived d-none d-md-block' : 'menu-left d-none d-md-block'}>
         <div className='menu-left__hamburger' onClick={() => setIsActiveMenu(!isActiveMenu)}>
           <img src='/assets/icons/menu_left.svg' alt='icon menu' />
         </div>
@@ -42,7 +43,7 @@ export default function Dashboard() {
       </nav>
       <section className={isActiveMenu ? 'dashboard-content actived' : 'dashboard-content'}>
         <section className='dashboard-content__section'>
-          <h1>General</h1>
+          <General />
         </section>
         <section className='dashboard-content__section hidden'>
           <h1>Reservas</h1>

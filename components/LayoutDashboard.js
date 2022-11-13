@@ -10,7 +10,7 @@ export default function LayoutDashboard ({ children }) {
   return (
     <>
       <Head>
-        <title>Motoenvia</title>
+        <title>MOVEBIKE</title>
       </Head>
       <Navbar />
       {children}
