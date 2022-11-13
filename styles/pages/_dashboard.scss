@@ -15,3 +15,16 @@
         }
     }
 }
+
+.dashboard{
+    &__title {
+        font-family: variables.$font-lato;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 38px;
+        color: variables.$black-700;
+        margin-bottom: 25px;
+        margin-top: 21px;
+    }
+}

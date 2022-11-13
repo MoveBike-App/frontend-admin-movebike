@@ -4,7 +4,7 @@ import Input from './Input'
 export default function LoginCard () {
   return (
     <>
-      <div className='container card login-card p-4 shadow'>
+      <article className='container card login-card p-4 shadow'>
         <div className='row d-flex'>
           <div className='col-12'>
             <h1 className='text-center login-card__title mb-4 mt-3'>Perfil de negocio</h1>
@@ -19,7 +19,7 @@ export default function LoginCard () {
             </form>
           </div>
         </div>
-      </div>
+      </article>
     </>
   )
 }

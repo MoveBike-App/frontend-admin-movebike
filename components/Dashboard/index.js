@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import LayoutDashboard from '../LayoutDashboard'
 import General from './General'
+import Bookings from './Bookings'
 
 export default function Dashboard () {
   const [isActiveMenu, setIsActiveMenu] = useState(false)
@@ -46,7 +47,7 @@ export default function Dashboard () {
           <General />
         </section>
         <section className='dashboard-content__section hidden'>
-          <h1>Reservas</h1>
+          <Bookings />
         </section>
         <section className='dashboard-content__section hidden'>
           <h1>Motos</h1>
