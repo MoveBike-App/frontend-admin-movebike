@@ -8,8 +8,8 @@ export default function General() {
   return (
     <>
       <div className="container-fluid text-center text-md-start">
-        <div className="row mt-4 m-md-5">
-        <h1 className="m-3 p-0">General</h1>
+        <div className="row mt-3 m-md-3">
+        <h1 className="m-2 p-0">General</h1>
 
           <div className="col-12 col-lg-7">
 
