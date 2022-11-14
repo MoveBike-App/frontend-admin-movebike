@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
+import dynamic from 'next/dynamic'
 import LayoutDashboard from '../LayoutDashboard'
 import General from './General'
 import Bookings from './Bookings'
+
+const Motos = dynamic(
+  () => import('./Motos'),
+  { ssr: false } // <-- not including this component on server-side
+)
 
 export default function Dashboard () {
   const [isActiveMenu, setIsActiveMenu] = useState(false)
@@ -50,7 +56,7 @@ export default function Dashboard () {
           <Bookings />
         </section>
         <section className='dashboard-content__section hidden'>
-          <h1>Motos</h1>
+          <Motos />
         </section>
         <section className='dashboard-content__section hidden'>
           <h1>Rutas</h1>

@@ -1,0 +1,29 @@
+@use '../../../abstract/variables';
+@use '../../../abstract/mixins';
+
+.addMotos {
+
+
+    &__upload {
+        max-width: 161px;
+        padding: 24px 35px;
+        background-color: variables.$white;
+        box-shadow: 2px 4px 22px rgba(0, 0, 0, 0.16);
+        border-radius: 16px;
+    }
+
+    &__btn {
+        width: 250px;
+        height: 38px;
+        border-radius: 4px;
+
+        &--save{
+            filter: drop-shadow(2px 4px 22px rgba(0, 0, 0, 0.16));
+            margin-left: 32px;
+        }
+    }
+
+    &__available-date{
+        border: 1px solid variables.$orange-900;
+    }
+}
