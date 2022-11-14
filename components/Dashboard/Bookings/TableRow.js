@@ -11,7 +11,7 @@ export default function TableRow ({ reserve, date, status, total }) {
         <td>
           <Image
             className='me-3'
-            src='/../public/assets/icons/eye-icon.webp'
+            src='/assets/icons/eye-icon.webp'
             alt='eye icon'
             width={28}
             height={28}
@@ -26,14 +26,14 @@ export default function TableRow ({ reserve, date, status, total }) {
           <div className='d-flex justify-content-center pt-3 pb-3'>
             <Image
               className='me-2 ms-2'
-              src='/../public/assets/icons/edit-icon.webp'
+              src='/assets/icons/edit-icon.webp'
               alt='eye icon'
               width={28}
               height={28}
             />
             <Image
               className='me-3'
-              src='/../public/assets/icons/trash-icon.webp'
+              src='/assets/icons/trash-icon.webp'
               alt='eye icon'
               width={28}
               height={28}

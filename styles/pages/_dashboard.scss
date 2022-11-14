@@ -28,3 +28,15 @@
         margin-top: 21px;
     }
 }
+
+.gridjs-container {
+    @include mixins.responsive(variables.$large) {
+        width: auto !important;
+    }
+}
+
+// .gridjs-table {
+//     @include mixins.responsive(variables.$large) {
+//         width: 100%;
+//     }
+// }
