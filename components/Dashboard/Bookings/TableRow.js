@@ -1,7 +1,12 @@
-import React from 'react'
+
+
+import React, { useEffect, useRef, useState } from "react";
 import Image from 'next/image'
 
 export default function TableRow ({ reserve, date, status, total }) {
+ 
+
+
   return (
     <>
       <tr>
@@ -41,6 +46,7 @@ export default function TableRow ({ reserve, date, status, total }) {
           </div>
         </td>
       </tr>
+      
     </>
   )
 }
