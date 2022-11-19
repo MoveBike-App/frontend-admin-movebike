@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import dynamic from 'next/dynamic'
 import MessageModal from "../../MessageModal";
 import AddMoto from "./AddMoto";
+const axios = require('axios')
 
 
 const TableMotos = dynamic(
@@ -10,6 +11,22 @@ const TableMotos = dynamic(
 )
 
 export default function Motos() {
+
+  const [motos, setMotos] = useState([])
+  const [datePosted, setDatePosted] = useState('')
+  const URLAPI = 'https://api.movebike.mx/'
+
+  useEffect(() => {
+    axios
+      .get(`${URLAPI}motos`)
+      .then(function (response) {
+        const motos = response.data.data.mot
+        console.log(motos)
+        setMotos(motos)
+      })
+      .catch((error) => {})
+  }, [])
+
   const [addMoto, setAddMoto] = useState(false);
   const [success, setSuccess] = useState(false)
   const handleClose = () => setAddMoto(false);
