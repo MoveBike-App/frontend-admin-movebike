@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react'
 import { Grid } from 'gridjs'
 import 'gridjs/dist/theme/mermaid.css'
-import BookDetail from "../../Dashboard/Bookings/BookDetail";
+import BookDetail from '../../Dashboard/Bookings/BookDetail'
 import TableRow from './TableRow'
 
 export default function Bookings () {
   const tableRef = useRef(null)
   const wrapperRef = useRef(null)
-  const [showReserve, setShowReserve] = useState(false);
-  const handleClose = () => setShowReserve(false);
-  const handleClick = () => setShowReserve(true);
+  const [showReserve, setShowReserve] = useState(false)
+  const handleClose = () => setShowReserve(false)
+  const handleClick = () => setShowReserve(true)
 
   useEffect(() => {
     const grid = new Grid({
@@ -82,21 +82,21 @@ export default function Bookings () {
             </table>
             <div ref={wrapperRef} />
           </div>
-      <button
-        className="btn btn-movebike contained"
-        onClick={() => setShowReserve(true)}
-      >
-           Ver reserva
-      </button>
+          <button
+            className='btn btn-movebike contained w-auto'
+            onClick={() => setShowReserve(true)}
+          >
+            Ver reserva
+          </button>
 
-      <BookDetail
-        show={showReserve}
-        edit={false}
-        handleClose={handleClose}
-        handleClick={handleClose}
-        onHide={() => setShowReserve(false)}
-        reserve = {{'_id':'123cin'}}
-      />
+          <BookDetail
+            show={showReserve}
+            edit={false}
+            handleClose={handleClose}
+            handleClick={handleClose}
+            onHide={() => setShowReserve(false)}
+            reserve={{ _id: '123cin' }}
+          />
         </div>
       </div>
     </main>

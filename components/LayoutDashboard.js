@@ -13,7 +13,7 @@ export default function LayoutDashboard ({ children }) {
       <Head>
         <title>MOVEBIKE</title>
       </Head>
-        <Script src="https://kit.fontawesome.com/45194397a4.js" crossOrigin="anonymous" />
+      <Script src='https://kit.fontawesome.com/45194397a4.js' crossOrigin='anonymous' />
       <Navbar />
       {children}
     </>
