@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import MessageModal from "../../MessageModal";
-import AddMoto from "./AddMoto";
+import MessageModal from '../../MessageModal'
+import AddMoto from './AddMoto'
 const axios = require('axios')
-
 
 const TableMotos = dynamic(
   () => import('./TableMotos'),
   { ssr: false } // <-- not including this component on server-side
 )
 
-export default function Motos() {
-
+export default function Motos () {
   const [motos, setMotos] = useState([])
   const [datePosted, setDatePosted] = useState('')
   const URLAPI = 'https://api.movebike.mx/'
@@ -27,25 +25,25 @@ export default function Motos() {
       .catch((error) => {})
   }, [])
 
-  const [addMoto, setAddMoto] = useState(false);
+  const [addMoto, setAddMoto] = useState(false)
   const [success, setSuccess] = useState(false)
-  const handleClose = () => setAddMoto(false);
+  const handleClose = () => setAddMoto(false)
   return (
     <>
       <section>
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <h1 className="dashboard__title">Inventario de motos</h1>
+        <div className='container'>
+          <div className='row'>
+            <div className='col-12'>
+              <h1 className='dashboard__title'>Inventario de motos</h1>
               <button
-                className="btn btn-movebike contained"
+                className='btn btn-movebike contained'
                 onClick={() => setAddMoto(true)}
               >
-                <i className="fa-solid fa-plus me-2"></i>
+                <i className='fa-solid fa-plus me-2' />
                 Agregar moto
               </button>
             </div>
-            <div className="col-12">
+            <div className='col-12'>
               <TableMotos />
             </div>
           </div>
@@ -60,5 +58,5 @@ export default function Motos() {
         onHide={() => setAddMoto(false)}
       />
     </>
-  );
+  )
 }
