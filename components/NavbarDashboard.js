@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import ConfirmModal from './ConfirmModal'
 
 export default function NavbarDashboard () {
   const handleClick = optionSelected => {
@@ -56,7 +58,7 @@ export default function NavbarDashboard () {
           </div>
           <div className='order-1 order-md-2 notifications-logout'>
             <i className='fas fa-bell' />
-            <i className='fas fa-sign-out-alt d-none d-md-block' />
+            <ConfirmModal />
           </div>
         </div>
       </nav>
