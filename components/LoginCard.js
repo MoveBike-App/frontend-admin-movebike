@@ -11,7 +11,7 @@ export default function LoginCard () {
     formState: { errors },
     handleSubmit
   } = useForm()
-  const URL = 'http://api.movebike.mx/'
+  const URL = 'https://api.movebike.mx/'
 
   const onSubmit = ({ email, password }) => {
     axios
@@ -21,8 +21,8 @@ export default function LoginCard () {
       })
       .then((response) => {
         const token = response.data.token
-        const { id, name } = response.data.userCurrent
-        const userCurrent = { id, company: name, token }
+        const { id, name, role } = response.data.userCurrent
+        const userCurrent = { id, company: name, token, role: role}
         localStorage.setItem('token', token)
         localStorage.setItem('userCurrent', JSON.stringify(userCurrent))
         const returnUrl = router.query.returnUrl || '/dashboard'
