@@ -1,4 +1,5 @@
-import React from 'react'
+
+import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
 export default function TableRow ({ reserve, date, status, total }) {
@@ -6,7 +7,7 @@ export default function TableRow ({ reserve, date, status, total }) {
     <>
       <tr>
         <td>
-          <div className='reserve__number shadow-sm mx-auto' >#{reserve}</div>
+          <div className='reserve__number shadow-sm mx-auto'>#{reserve}</div>
         </td>
         <td>
           <Image
@@ -41,6 +42,7 @@ export default function TableRow ({ reserve, date, status, total }) {
           </div>
         </td>
       </tr>
+
     </>
   )
 }

@@ -32,3 +32,15 @@
     filter: drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.08));
   }
 }
+
+.dropdown-item{
+  &:hover{
+    background-color: variables.$orange-900;
+    opacity: .8;
+    color:white;
+  }
+}
+
+.status-dropdown{
+  min-width: 150px;
+}
