@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import dynamic from 'next/dynamic'
 import MessageModal from "../../MessageModal";
 import AddMoto from "./AddMoto";
+import Image from "next/image";
 
 
 const TableMotos = dynamic(
@@ -12,6 +13,11 @@ const TableMotos = dynamic(
 export default function Motos() {
   const [addMoto, setAddMoto] = useState(false);
   const [success, setSuccess] = useState(false)
+  const handleClickSuccess = () => {
+    setAddMoto(false)
+    setSuccess(true)
+  }
+  const handleCloseSuccess = () => setSuccess(false)
   const handleClose = () => setAddMoto(false);
   return (
     <>
@@ -39,8 +45,17 @@ export default function Motos() {
         edit={false}
         show={addMoto}
         handleClose={handleClose}
-        handleClick={handleClose}
+        handleClick={handleClickSuccess}
         onHide={() => setAddMoto(false)}
+      />
+
+      <MessageModal
+        show={success}
+        handleClose={handleCloseSuccess}
+        handleClick={handleClickSuccess}
+        success={true}
+        msg='¡Tu moto ha sido creado scorrectamente!'
+        onHide={() => setSuccess(false)}
       />
     </>
   );

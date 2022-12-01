@@ -17,13 +17,15 @@
         height: 38px;
         border-radius: 4px;
 
-        &--save{
+        &--save {
             filter: drop-shadow(2px 4px 22px rgba(0, 0, 0, 0.16));
             margin-left: 32px;
         }
     }
 
-    &__available-date{
+    &__available-date {
         border: 1px solid variables.$orange-900;
     }
+
+    
 }

@@ -36,3 +36,11 @@
 .text-gray-400 {
     color: variables.$gray-400;
 }
+
+.btn-ok {
+    min-width: 250px;
+    height: 38px;
+    background-color: variables.$orange-900;
+    border: 1px solid #FE5F3B;
+    border-radius: 3px!important;
+}

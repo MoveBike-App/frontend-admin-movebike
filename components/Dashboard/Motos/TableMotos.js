@@ -3,6 +3,7 @@ import { Grid } from "gridjs";
 import "gridjs/dist/theme/mermaid.css";
 import Image from "next/image";
 import AddMoto from "./AddMoto";
+import MessageModal from "../../MessageModal";
 
 const wsSport150 = "/assets/images/flotebikers/ws-sport-150.webp";
 const vitalia125 = "/assets/images/flotebikers/vitalia-125.webp";
@@ -14,6 +15,7 @@ export default function TableMotos() {
   const [add, setAddMoto] = useState(false);
   const handleClose = () => setAddMoto(false);
   const handleClick = () => setAddMoto(true);
+  
 
   
 
@@ -135,6 +137,7 @@ export default function TableMotos() {
         handleClick={handleClose}
         onHide={() => setAddMoto(false)}
       />
+      
     </>
   );
 }
