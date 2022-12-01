@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import LayoutDashboard from '../LayoutDashboard'
 import General from './General'
 import Bookings from './Bookings'
+import Route from './Routes'
 
 const Motos = dynamic(
   () => import('./Motos'),
@@ -59,7 +60,7 @@ export default function Dashboard () {
           <Motos />
         </section>
         <section className='dashboard-content__section hidden'>
-          <h1>Rutas</h1>
+          <Route />
         </section>
 
       </section>

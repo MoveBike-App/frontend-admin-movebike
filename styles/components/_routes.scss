@@ -1,0 +1,94 @@
+@use '../abstract/variables';
+
+.article {
+    font-size: 12px;
+    max-width: 400px;
+    border-radius: 20px;
+  &__title {
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 25px;
+  }
+  &__title--ppal {
+    font-size: 30px;
+  }
+  &__link {
+    font-size: 14px;
+    text-decoration: none;
+    color: black;
+  }
+  &__autor {
+    width: 32px;
+    height: 32px;
+  }
+  &__btn {
+    font-size: 14px;
+  }
+}
+
+
+.post {
+    font-size: 16px;
+    margin-top: 40px;
+  
+  &__down {
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 45px;
+  }
+  &__down:hover {
+    color: rgb(47, 58, 178);
+  }
+  &__title {
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 45px;
+    -webkit-text-size-adjust: 100%;
+       -moz-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+  }
+  &__text {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  &__autor {
+    width: 40px;
+    height: 40px;
+  }
+  &__logo {
+    width: 32px;
+    height: 32px;
+  }
+  &__input {
+    width: 100%;
+    height: 64px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid gray;
+  }
+  &__btn {
+    font-size: 16px;
+    text-decoration: none !important;
+  }
+}
+
+.route{
+    &__img{
+        max-width: 300px;
+        width: 100%;
+        height: 200px;
+        border-radius: 15px;
+    }
+    &__btn{
+        font-size: 14px;
+        font-weight: 500;
+    }
+    &__btns{
+        font-size: 14px;
+        &:hover{
+            border: variables.$orange-900;
+            box-shadow: inset;
+        }
+    }
+}
