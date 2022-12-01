@@ -1,14 +1,12 @@
-import React, { useEffect, useRef } from "react";
-import { Grid } from "gridjs-react";
-import "gridjs/dist/theme/mermaid.css";
+import React, { useEffect, useRef, useState } from 'react'
+import { Grid } from 'gridjs-react'
+import 'gridjs/dist/theme/mermaid.css'
+import { getReserves } from '/services/reserves/reserves'
 
-import { getReserveByCustomer } from "../services/reserves/reserves.js";
-import { useState } from "react";
-
-export default function Dashboard() {
-  const tableRef = useRef(null);
-  const wrapperRef = useRef(null);
-  //const [reserves, setReserves] = useState([]);
+export default function Bookings () {
+  const tableRef = useRef(null)
+  const wrapperRef = useRef(null)
+  // const [reserves, setReserves] = useState([]);
 
   const row = (reserves) =>
     reserves.map((reserva) => [
@@ -16,61 +14,60 @@ export default function Dashboard() {
       reserva.status,
       reserva.initialDate,
       reserva.finalDate
-    ]);
-  const [data, setData] = useState([]);
+    ])
+  const [data, setData] = useState([])
 
-  console.log(data);
+  console.log(data)
 
-  const [pageSize, setPageSize] = React.useState(5);
+  const [pageSize, setPageSize] = React.useState(5)
 
   const getAllReserves = async () => {
-    const user = localStorage.getItem("userCurrent");
-    const { id, slug } = JSON.parse(user);
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token')
+    const user = localStorage.getItem('userCurrent')
+    const { id, slug } = JSON.parse(user)
     try {
-      const response = await getReserveByCustomer(id, token);
-      console.log(response.data.data.customer.reserve);
-      //setReserves(response.data.data.customer.reserve);
-      setData(row(response.data.data.customer.reserve));
-      const rows = [];
+      const response = await getReserves(token)
+      console.log(response.data.data.reserves)
+      setData(row(response.data.data.reserves))
+      const rows = []
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   useEffect(() => {
-    getAllReserves();
-  }, []);
+    getAllReserves()
+  }, [])
 
   return (
-      <main className="container-fluid bookings">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <h1 className="bookings__title">Mis reservas</h1>
-            </div>
-            <div className="col-md-12 mx-auto">
-              <div>
-                <Grid
-                  data={data}
-                  columns={[
-                    { id: "reserveNumber", name: "No. Reserva" },
-                    { id: "status", name: "Estado" },
-                    { id: "initialDate", name: "Fecha Inicial" },
-                    { id: "finalDate", name: "Fecha Fin" },
-                    { name: 'Actions'}
-                  ]}
-                  search={true}
-                  sort={true}
-                  pagination={{
-                    enabled: true,
-                    limit: 10,
-                  }}
-                />
-              </div>
+    <main className='container-fluid bookings'>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-12'>
+            <h1 className='bookings__title'>Mis reservas</h1>
+          </div>
+          <div className='col-md-12 mx-auto'>
+            <div>
+              <Grid
+                data={data}
+                columns={[
+                  { id: 'reserveNumber', name: 'No. Reserva' },
+                  { id: 'status', name: 'Estado' },
+                  { id: 'initialDate', name: 'Fecha Inicial' },
+                  { id: 'finalDate', name: 'Fecha Fin' },
+                  { name: 'Actions' }
+                ]}
+                search
+                sort
+                pagination={{
+                  enabled: true,
+                  limit: 10
+                }}
+              />
             </div>
           </div>
         </div>
-      </main>
-  );
+      </div>
+    </main>
+  )
 }
