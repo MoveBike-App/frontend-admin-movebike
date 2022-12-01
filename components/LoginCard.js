@@ -22,7 +22,7 @@ export default function LoginCard () {
       .then((response) => {
         const token = response.data.token
         const { id, name, role } = response.data.userCurrent
-        const userCurrent = { id, company: name, token, role: role}
+        const userCurrent = { id, company: name, token, role }
         localStorage.setItem('token', token)
         localStorage.setItem('userCurrent', JSON.stringify(userCurrent))
         const returnUrl = router.query.returnUrl || '/dashboard'
