@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-import Input from './Input'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-
-export default function LoginCard () {
-  const router = useRouter()
-
-  const handleDashboard = () => {
-    router.push('/dashboard')
-  }
-=======
 import { useForm } from 'react-hook-form'
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
@@ -46,7 +33,6 @@ export default function LoginCard () {
       })
   }
 
->>>>>>> d52be9f162e31841f35114bb4d5c7f14dea5807d
   return (
     <>
       <article className='container card login-card p-4 shadow'>
@@ -107,12 +93,8 @@ export default function LoginCard () {
                 <input type='checkbox' className='form-check-input login-card__box' id='exampleCheck1' />
                 <label className='form-check-label login-card__checkbox' htmlFor='exampleCheck1'>Recuérdame</label>
               </div>
-<<<<<<< HEAD
-              <Link href={'/dashboard'}  className='btn btn-movebike contained shadow login-card__btn w-100 mb-3'>Iniciar sesión</Link>
-=======
               <button type='submit' className='btn btn-movebike contained shadow login-card__btn w-100 mb-3'>Iniciar sesión</button>
 
->>>>>>> d52be9f162e31841f35114bb4d5c7f14dea5807d
             </form>
 
           </div>

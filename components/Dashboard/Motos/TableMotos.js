@@ -1,40 +1,19 @@
-<<<<<<< HEAD
-import React, { useEffect, useRef, useState } from "react";
-import { Grid } from "gridjs";
-import "gridjs/dist/theme/mermaid.css";
-import Image from "next/image";
-import AddMoto from "./AddMoto";
-import MessageModal from "../../MessageModal";
-=======
 import React, { useEffect, useRef, useState } from 'react'
 import { Grid } from 'gridjs'
 import 'gridjs/dist/theme/mermaid.css'
 import Image from 'next/image'
 import AddMoto from './AddMoto'
->>>>>>> d52be9f162e31841f35114bb4d5c7f14dea5807d
 
 const wsSport150 = '/assets/images/flotebikers/ws-sport-150.webp'
 const vitalia125 = '/assets/images/flotebikers/vitalia-125.webp'
 const vitalia150 = '/assets/images/flotebikers/a-150.webp'
 
-<<<<<<< HEAD
-export default function TableMotos() {
-  const tableRef = useRef(null);
-  const wrapperRef = useRef(null);
-  const [add, setAddMoto] = useState(false);
-  const handleClose = () => setAddMoto(false);
-  const handleClick = () => setAddMoto(true);
-  
-
-  
-=======
 export default function TableMotos () {
   const tableRef = useRef(null)
   const wrapperRef = useRef(null)
   const [add, setAddMoto] = useState(false)
   const handleClose = () => setAddMoto(false)
   const handleClick = () => setAddMoto(true)
->>>>>>> d52be9f162e31841f35114bb4d5c7f14dea5807d
 
   useEffect(() => {
     const grid = new Grid({

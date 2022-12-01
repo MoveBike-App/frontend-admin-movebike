@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
-<<<<<<< HEAD
-import MessageModal from "../../MessageModal";
-import AddMoto from "./AddMoto";
-import Image from "next/image";
-
-=======
 import MessageModal from '../../MessageModal'
 import AddMoto from './AddMoto'
 const axios = require('axios')
->>>>>>> d52be9f162e31841f35114bb4d5c7f14dea5807d
 
 const TableMotos = dynamic(
   () => import('./TableMotos'),
@@ -34,16 +27,7 @@ export default function Motos () {
 
   const [addMoto, setAddMoto] = useState(false)
   const [success, setSuccess] = useState(false)
-<<<<<<< HEAD
-  const handleClickSuccess = () => {
-    setAddMoto(false)
-    setSuccess(true)
-  }
-  const handleCloseSuccess = () => setSuccess(false)
-  const handleClose = () => setAddMoto(false);
-=======
   const handleClose = () => setAddMoto(false)
->>>>>>> d52be9f162e31841f35114bb4d5c7f14dea5807d
   return (
     <>
       <section>
