@@ -21,8 +21,8 @@ function createMoto(token, data) {
     body: data,
     headers: {
       Authorization: token,
-      mode: "cors",
-    },
+      mode: "cors"
+    }
   };
   return fetch(URL, options);
 }

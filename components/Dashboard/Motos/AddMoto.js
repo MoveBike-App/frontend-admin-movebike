@@ -6,8 +6,8 @@ import CustomDay from '../General/CustomDay'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import FormData from 'form-data'
-const iconUpload = '/assets/icons/icon-upload.webp'
-const axios = require('axios')
+import { createMoto } from '../../../services/motos/motos'
+import ConfirmModal from '../../ConfirmModal'
 
 export default function AddMoto ({
   show,
@@ -18,51 +18,59 @@ export default function AddMoto ({
   const router = useRouter()
   const {
     register,
+    resetField,
     formState: { errors },
     handleSubmit
   } = useForm()
-  const URL = 'https://movebike.api.mx/'
-  const token = localStorage.getItem('token')
 
-  const onSubmit = ({
+  const onSubmit = async ({
+    image,
     name,
     vehiclePlate,
     model,
     minAge,
-    vehicleType,
-    securityHold,
+/*     vehicleType,
+ */    securityHold,
     price,
     inssurance,
     features,
-    assurance,
-    image
+    assurance
 
   }) => {
     const bodyFormData = new FormData()
+    bodyFormData.append("image", image['0']);
     bodyFormData.append('name', name)
+    bodyFormData.append('vehiclePlate', vehiclePlate)
+    bodyFormData.append('model', model)
+    bodyFormData.append('minAge', minAge)
+/*     bodyFormData.append('vehicleType', vehicleType)
+ */    bodyFormData.append('securityHold', securityHold)
+    bodyFormData.append('price', price)
+    bodyFormData.append('inssurance', inssurance)
+/*     bodyFormData.append('features', features)
+ */    bodyFormData.append('assurance', assurance)
 
-    const headers = {
-      Authorization: token
-    }
-    axios
-      .post(
-        `${URL}motos`, bodyFormData, {
-          headers: {
-            accept: 'application/json',
-            'Content-Type': 'multipart/form-data',
-            boundary: 'MyBoundary',
-            Authorization: token
-          }
-        }
 
-      )
-      .then((response) => {
-        router.push(response)
-      })
-      .catch((error) => {
-      })
-  }
-
+    const token = localStorage.getItem('token')
+    try{
+      const response = await createMoto(token, bodyFormData)
+      const data = await response.json()
+      console.log(data)
+      resetField("image")
+      resetField("name")
+      resetField("price")
+      resetField("inssurance")
+      resetField("features")
+      resetField("assurance")
+      resetField("vehicleType")
+      resetField("minAge")
+      resetField("model")
+      resetField("vehiclePlate")
+      ConfirmModal()
+    }catch(error){
+      console.log(error)
+    }   
+}
   return (
     <>
       <Modal
@@ -152,7 +160,7 @@ export default function AddMoto ({
                   <input
                     type='text'
                     className='form-control login__input'
-                    {...register('inssurance', { require: true })}
+                    {...register('securityHold', { require: true })}
                   />
                 </div>
                 <div className='mb-2'>
@@ -255,7 +263,7 @@ export default function AddMoto ({
                 type='submit'
                 id='addMoto'
                 className='btn btn-movebike contained addMotos__btn addMotos__btn--save'
-                /* onClick={handleClick} */
+                onClick={handleClick}
               >
                 Guardar
               </Button>

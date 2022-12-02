@@ -3,7 +3,7 @@ import { Grid, _ } from 'gridjs-react'
 import { DataGrid } from "@mui/x-data-grid";
 import 'gridjs/dist/theme/mermaid.css'
 import Image from "next/image";
-import { getReserves } from '/services/reserves/reserves'
+import { getAllReserves } from '/services/reserves/reserves'
 
 const myLoader = ({ src }) => {
   return `${src}`;
@@ -28,20 +28,21 @@ export default function Bookings () {
 
   const [pageSize, setPageSize] = React.useState(5)
 
-  const getAllReserves = async () => {
+  const getReserves = async () => {
     const token = localStorage.getItem('token')
-    const user = localStorage.getItem('userCurrent')
-    const { id, slug } = JSON.parse(user)
+    /* const user = localStorage.getItem('userCurrent')
+    const { id, slug } = JSON.parse(user) */
     try {
-      const response = await getReserves(token)
-      setData(row(response.data.data.reserves))
+      const response = await getAllReserves(token)
+      const { data: { reserves }} = await response.json()
+      setData(row(reserves))
       const rows = []
     } catch (error) {
     }
   }
 
   useEffect(() => {
-    getAllReserves()
+    getReserves()
   }, [])
 
   return (

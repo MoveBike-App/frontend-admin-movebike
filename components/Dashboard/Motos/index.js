@@ -27,8 +27,8 @@ export default function Motos() {
 
   const getMotos = async () => {
     const token = localStorage.getItem("token");
-    const user = localStorage.getItem("userCurrent");
-    const { id, slug } = JSON.parse(user);
+    /* const user = localStorage.getItem("userCurrent");
+    const { id, slug } = JSON.parse(user); */
     try {
       const response = await getAllMotos(token);
       const { data: { motos }} = await response.json()
