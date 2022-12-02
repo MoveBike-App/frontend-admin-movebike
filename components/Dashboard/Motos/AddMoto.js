@@ -157,7 +157,7 @@ export default function AddMoto ({
                 </div>
                 <div className='mb-2'>
                   <label className='form-label login__label'>
-                    No. Póliza de seguro
+                    No. Poliza de seguro
                   </label>
                   <input
                     type='text'
