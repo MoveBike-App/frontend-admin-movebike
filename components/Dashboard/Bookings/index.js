@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Grid, _ } from 'gridjs-react'
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid } from '@mui/x-data-grid'
 import 'gridjs/dist/theme/mermaid.css'
-import Image from "next/image";
+import Image from 'next/image'
 import { getAllReserves } from '/services/reserves/reserves'
 
 const myLoader = ({ src }) => {
-  return `${src}`;
-};
+  return `${src}`
+}
 
 export default function Bookings () {
   const tableRef = useRef(null)
@@ -16,9 +16,9 @@ export default function Bookings () {
 
   const row = (reserves) =>
     reserves.map((reserva) => [
-      reserva.vehicle['image'],
+      reserva.vehicle.image,
       reserva.reserveNumber,
-      reserva.customer['email'],
+      reserva.customer.email,
       reserva.totalPrice,
       reserva.status,
       reserva.initialDate,
@@ -34,7 +34,7 @@ export default function Bookings () {
     const { id, slug } = JSON.parse(user) */
     try {
       const response = await getAllReserves(token)
-      const { data: { reserves }} = await response.json()
+      const { data: { reserves } } = await response.json()
       setData(row(reserves))
       const rows = []
     } catch (error) {
@@ -58,29 +58,29 @@ export default function Bookings () {
                 data={data}
                 columns={[
                   {
-                    id: "image",
-                    name: "Imagen",
+                    id: 'image',
+                    name: 'Imagen',
                     formatter: (cell) =>
                       _(
                         <Image
-                        loader={myLoader}
-                        src={`${cell}`}
-                        alt="moto img"
-                        width={80}
-                        height={80}
-                      />
-                      ),
+                          loader={myLoader}
+                          src={`${cell}`}
+                          alt='moto img'
+                          width={80}
+                          height={80}
+                        />
+                      )
                   },
                   { id: 'reserveNumber', name: 'No. Reserva' },
-                  { id: 'customer', name: 'Cliente'},  
-                  { id: 'totalPrice', name: 'Total' },                
+                  { id: 'customer', name: 'Cliente' },
+                  { id: 'totalPrice', name: 'Total' },
                   { id: 'status', name: 'Estado' },
                   { id: 'initialDate', name: 'Fecha Inicial' },
                   { id: 'finalDate', name: 'Fecha Fin' },
                   { name: 'Actions' }
                 ]}
-                search={true}
-                sort={true}
+                search
+                sort
                 pagination={{
                   enabled: true,
                   limit: 10

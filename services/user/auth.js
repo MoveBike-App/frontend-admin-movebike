@@ -1,8 +1,8 @@
-import { URL_BASE } from "../config";
+import { URL_BASE } from '../config'
 
-function authLogin(credentials) {
+function authLogin (credentials) {
   const URL = `${URL_BASE}auth/login`
-  console.log('crede',credentials);
+  console.log('crede', credentials)
   const options = {
     method: 'POST',
     body: JSON.stringify(credentials),
@@ -12,10 +12,9 @@ function authLogin(credentials) {
     mode: 'cors'
   }
 
-  return fetch(URL, options);
+  return fetch(URL, options)
 }
 
 export {
-    authLogin
-  }
-  
+  authLogin
+}

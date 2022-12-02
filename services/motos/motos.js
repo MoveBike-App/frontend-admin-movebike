@@ -1,30 +1,30 @@
-import { URL_BASE } from "../config";
+import { URL_BASE } from '../config'
 
-function getAllMotos(token) {
-  const URL = `${URL_BASE}motos`;
+function getAllMotos (token) {
+  const URL = `${URL_BASE}motos`
 
   const options = {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
+      'Content-Type': 'application/json',
+      Authorization: token
     },
-    mode: "cors",
-  };
-  return fetch(URL, options);
+    mode: 'cors'
+  }
+  return fetch(URL, options)
 }
 
-function createMoto(token, data) {
-  const URL = `${URL_BASE}motos`;
+function createMoto (token, data) {
+  const URL = `${URL_BASE}motos`
   const options = {
-    method: "POST",
+    method: 'POST',
     body: data,
     headers: {
       Authorization: token,
-      mode: "cors"
+      mode: 'cors'
     }
-  };
-  return fetch(URL, options);
+  }
+  return fetch(URL, options)
 }
 
-export { getAllMotos, createMoto };
+export { getAllMotos, createMoto }
