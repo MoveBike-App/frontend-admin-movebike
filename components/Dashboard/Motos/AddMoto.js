@@ -60,7 +60,6 @@ export default function AddMoto ({
         router.push(response)
       })
       .catch((error) => {
-        console.log(error)
       })
   }
 

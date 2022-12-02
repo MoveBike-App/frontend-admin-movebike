@@ -17,8 +17,6 @@ export default function Bookings () {
     ])
   const [data, setData] = useState([])
 
-  console.log(data)
-
   const [pageSize, setPageSize] = React.useState(5)
 
   const getAllReserves = async () => {
@@ -27,11 +25,9 @@ export default function Bookings () {
     const { id, slug } = JSON.parse(user)
     try {
       const response = await getReserves(token)
-      console.log(response.data.data.reserves)
       setData(row(response.data.data.reserves))
       const rows = []
     } catch (error) {
-      console.log(error)
     }
   }
 

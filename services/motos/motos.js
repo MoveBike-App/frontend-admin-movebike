@@ -1,9 +1,17 @@
-const axios = require('axios')
+import { URL_BASE } from "../user/config";
 
-function getMotos (token) {
-  const URL = `${process.env.NEXT_PUBLIC_URL_API}motos`
+function getAllMotos (token) {
+  const URL = `${URL_BASE}motos`
 
-  return axios.get(URL, { headers: { Authorization: token } })
+  const options = {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+         Authorization: token
+    },
+    mode: 'cors'
+}
+return fetch(URL, options)
 }
 
-export { getMotos }
+export { getAllMotos }

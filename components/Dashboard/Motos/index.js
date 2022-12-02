@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Grid, _ } from "gridjs-react";
 import Image from "next/image";
-import { getMotos } from "/services/motos/motos";
+import { getAllMotos } from "/services/motos/motos";
 import AddMoto from "./AddMoto";
 
 const myLoader = ({ src }) => {
@@ -25,26 +25,26 @@ export default function Motos() {
 
   const [pageSize, setPageSize] = React.useState(5);
 
-  const getAllMotos = async () => {
+  const getMotos = async () => {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("userCurrent");
     const { id, slug } = JSON.parse(user);
     try {
-      const response = await getMotos(token);
-      setData(row(response.data.data.motos));
+      const response = await getAllMotos(token);
+      const { data: { motos }} = await response.json()
+      setData(row(motos));
       const rows = [];
     } catch (error) {
     }
   };
   useEffect(() => {
-    getAllMotos();
+    getMotos();
   }, []);
   const [addMoto, setAddMoto] = useState(false);
   const [success, setSuccess] = useState(false);
   const handleClose = () => setAddMoto(false);
   return (
     <>
-    
       <section>
         <div className="container">
           <div className="row">
@@ -58,7 +58,7 @@ export default function Motos() {
                 Agregar moto
               </button>
             </div>
-            <div className="col-12">
+            <div className="col-12 text-center">
               <div className="col-md-12 mx-auto">
                 <div>
                   <Grid
@@ -66,16 +66,15 @@ export default function Motos() {
                     columns={[
                       {
                         id: "image",
-
                         name: "Imagen",
                         formatter: (cell) =>
                           _(
                             <Image
                             loader={myLoader}
                             src={`${cell}`}
-                            alt="Scooter Vitalia 150" 
-                            width={160}
-                            height={140}
+                            alt="moto img"
+                            width={80}
+                            height={80}
                           />
                           ),
                       },
