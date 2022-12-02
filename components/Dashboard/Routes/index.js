@@ -7,7 +7,8 @@ export default function Route () {
   const getRoutes = async () => {
     try {
       const response = await getAllRoutes()
-      setRoutes(response.data.data.routes)
+      const { data: { routes }} = await response.json()
+      setRoutes(routes)
     } catch (error) {}
   }
 

@@ -1,26 +1,16 @@
-const axios = require('axios')
+import { URL_BASE } from "../config";
 
-/* function createReserve(
-  vehicle,
-  totalPrice,
-  isPaid,
-  initialDate,
-  finalDate,
-  token
-) {
-  const URL = `${process.env.NEXT_PUBLIC_URL_API}reserves`;
-
-  return axios.post(
-    URL,
-    { vehicle, totalPrice, isPaid, initialDate, finalDate },
-    { headers: { Authorization: token } }
-  );
-} */
-
-function getReserves (token) {
-  const URL = `${process.env.NEXT_PUBLIC_URL_API}reserves`
-
-  return axios.get(URL, { headers: { Authorization: token } })
+function getAllReserves (token) {
+  const URL = `${URL_BASE}reserves`
+  const options = {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+      },
+      mode: 'cors'
+  }
+  return fetch(URL, options)
 }
 
-export { getReserves }
+export { getAllReserves }
