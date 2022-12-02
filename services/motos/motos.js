@@ -1,4 +1,4 @@
-import { URL_BASE } from "../user/config";
+import { URL_BASE } from "../config"
 
 function getAllMotos (token) {
   const URL = `${URL_BASE}motos`

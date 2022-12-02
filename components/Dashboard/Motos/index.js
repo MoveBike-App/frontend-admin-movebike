@@ -59,7 +59,7 @@ export default function Motos() {
               </button>
             </div>
             <div className="col-12 text-center">
-              <div className="col-md-12 mx-auto">
+              <div className="col-md-12 motos-table">
                 <div>
                   <Grid
                     data={data}

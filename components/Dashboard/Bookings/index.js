@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Grid } from 'gridjs-react'
+import { Grid, _ } from 'gridjs-react'
+import { DataGrid } from "@mui/x-data-grid";
 import 'gridjs/dist/theme/mermaid.css'
+import Image from "next/image";
 import { getReserves } from '/services/reserves/reserves'
+
+const myLoader = ({ src }) => {
+  return `${src}`;
+};
 
 export default function Bookings () {
   const tableRef = useRef(null)
@@ -10,7 +16,10 @@ export default function Bookings () {
 
   const row = (reserves) =>
     reserves.map((reserva) => [
+      reserva.vehicle['image'],
       reserva.reserveNumber,
+      reserva.customer['email'],
+      reserva.totalPrice,
       reserva.status,
       reserva.initialDate,
       reserva.finalDate
@@ -47,14 +56,30 @@ export default function Bookings () {
               <Grid
                 data={data}
                 columns={[
+                  {
+                    id: "image",
+                    name: "Imagen",
+                    formatter: (cell) =>
+                      _(
+                        <Image
+                        loader={myLoader}
+                        src={`${cell}`}
+                        alt="moto img"
+                        width={80}
+                        height={80}
+                      />
+                      ),
+                  },
                   { id: 'reserveNumber', name: 'No. Reserva' },
+                  { id: 'customer', name: 'Cliente'},  
+                  { id: 'totalPrice', name: 'Total' },                
                   { id: 'status', name: 'Estado' },
                   { id: 'initialDate', name: 'Fecha Inicial' },
                   { id: 'finalDate', name: 'Fecha Fin' },
                   { name: 'Actions' }
                 ]}
-                search
-                sort
+                search={true}
+                sort={true}
                 pagination={{
                   enabled: true,
                   limit: 10

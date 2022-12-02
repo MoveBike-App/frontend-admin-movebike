@@ -82,7 +82,7 @@ export default function AddMoto ({
           </Modal.Header>
           <Modal.Body>
             <div className='row'>
-              <div className='col-md-4 d-flex flex-column'>
+              <div className='col-md-4 d-flex flex-column align-items-center'>
              
               <label htmlFor="file-input">
                 <i class="fa fa-cloud-upload upload-icon card-body"></i> 
@@ -157,7 +157,7 @@ export default function AddMoto ({
                 </div>
                 <div className='mb-2'>
                   <label className='form-label login__label'>
-                    No. Poliza de seguro
+                    No. Póliza de seguro
                   </label>
                   <input
                     type='text'
@@ -212,14 +212,14 @@ export default function AddMoto ({
                 </div>
                 <div className='mb-2'>
                   <label className='form-label login__label'>
-                    Caracteristicas
+                    Características
                   </label>
                   <select className='form-select'>
                     <option value='' selected disabled>
                       -- Selecciona las opciones --
                     </option>
                     <option value='Velocidad maxima 95 km/h'>
-                      Velocidad maxima 95 km/h
+                      Velocidad máxima 95 km/h
                     </option>
                     <option value='Incluye 2 cascos por cada moto'>
                       Incluye 2 cascos por cada moto
