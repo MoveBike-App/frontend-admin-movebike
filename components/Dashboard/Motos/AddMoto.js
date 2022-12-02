@@ -83,23 +83,17 @@ export default function AddMoto ({
           <Modal.Body>
             <div className='row'>
               <div className='col-md-4 d-flex flex-column'>
+             
+              <label htmlFor="file-input">
+                <i class="fa fa-cloud-upload upload-icon card-body"></i> 
                 <input
-                  id='file-input'
-                  type='file'
-                  name='Subir imagen'
-                  {...register('image', { require: false })}
+                  id="file-input"
+                  className="d-none"
+                  type="file"
+                  name="upload moto"
+                  {...register("image", { require: false })}
                 />
-                <button className='btn addMotos__upload'>
-                  <label for='file-input' className='form-label mt-2'>
-                    <Image
-                      src={iconUpload}
-                      alt='Icon upload'
-                      width={95}
-                      height={65}
-                    />
-                  </label>
-                </button>
-
+                </label>
                 <div className='mb-2 mt-4'>
                   <div className='form-check mb-2'>
                     <input
