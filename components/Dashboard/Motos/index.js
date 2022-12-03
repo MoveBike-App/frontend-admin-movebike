@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import { Grid, _, h } from "gridjs-react";
 import Image from "next/image";
 import { getAllMotos } from "/services/motos/motos";
 import AddMoto from "./AddMoto";
 import { deleteMoto } from '/services/motos/motos'
 import ConfirmModal from "../../ConfirmModal";
-import { useRouter } from "next/router";
 
 const myLoader = ({ src }) => {
   return `${src}`;
@@ -116,19 +115,6 @@ export default function Motos() {
                                 }
                               }} 
                             /> 
-                            
-
-                           /*  <button className="btn"
-                           onClick={shows}
-                            >
-                              <Image
-                                className="me-3"
-                                src="/assets/icons/trash-icon.webp"
-                                alt="trash icon"
-                                width={28}
-                                height={28}
-                              />
-                            </button> */
                           ),
                       },
                     ]}
