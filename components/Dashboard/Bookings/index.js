@@ -10,9 +10,6 @@ const myLoader = ({ src }) => {
 };
 
 export default function Bookings () {
-  const tableRef = useRef(null)
-  const wrapperRef = useRef(null)
-  // const [reserves, setReserves] = useState([]);
 
   const row = (reserves) =>
     reserves.map((reserva) => [
@@ -24,19 +21,19 @@ export default function Bookings () {
       reserva.initialDate,
       reserva.finalDate
     ])
-  const [data, setData] = useState([])
-
-  const [pageSize, setPageSize] = React.useState(5)
+    const [reserves, setReserves] = useState([])
+    const [pageSize, setPageSize] = React.useState(5)
 
   const getReserves = async () => {
     const token = localStorage.getItem('token')
-    /* const user = localStorage.getItem('userCurrent')
-    const { id, slug } = JSON.parse(user) */
+    const user = localStorage.getItem('userCurrent')
+    const { id, slug } = JSON.parse(user)
     try {
       const response = await getAllReserves(token)
-      const { data: { reserves }} = await response.json()
-      setData(row(reserves))
-      const rows = []
+      const {
+        data: { reserves },
+      } = await response.json();
+      setReserves(row(reserves));
     } catch (error) {
     }
   }
@@ -55,7 +52,7 @@ export default function Bookings () {
           <div className='col-md-12 mx-auto'>
             <div>
               <Grid
-                data={data}
+                data={reserves}
                 columns={[
                   {
                     id: "image",

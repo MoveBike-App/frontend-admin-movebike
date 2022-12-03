@@ -4,17 +4,21 @@ import { getAllRoutes } from '/services/routes/routes'
 
 export default function Route () {
   const [routes, setRoutes] = useState([])
+  
   const getRoutes = async () => {
     try {
       const response = await getAllRoutes()
-      const { data: { routes }} = await response.json()
+      const { data: { routes } } = await response.json()
       setRoutes(routes)
     } catch (error) {}
   }
-
+  const deleteRouteState = (deletedId) => {
+    setRoutes(routes.filter(r => r._id !== deletedId))
+  }
   useEffect(() => {
     getRoutes()
   }, [])
+ 
 
   return (
     <section className='container'>
@@ -35,9 +39,14 @@ export default function Route () {
                 image={post.image}
                 description={post.description}
                 createdAt={post.createdAt}
+                deletePost={post._id}
+                deleteRouteState={deleteRouteState}
+
               />
+
             ))
             .reverse()}
+
         </div>
       </main>
     </section>

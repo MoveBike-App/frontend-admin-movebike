@@ -29,8 +29,8 @@ export default function AddMoto ({
     vehiclePlate,
     model,
     minAge,
-/*     vehicleType,
- */    securityHold,
+    /*     vehicleType,
+ */ securityHold,
     price,
     inssurance,
     features,
@@ -38,39 +38,36 @@ export default function AddMoto ({
 
   }) => {
     const bodyFormData = new FormData()
-    bodyFormData.append("image", image['0']);
+    bodyFormData.append('image', image['0'])
     bodyFormData.append('name', name)
     bodyFormData.append('vehiclePlate', vehiclePlate)
     bodyFormData.append('model', model)
     bodyFormData.append('minAge', minAge)
-/*     bodyFormData.append('vehicleType', vehicleType)
- */    bodyFormData.append('securityHold', securityHold)
+    /*     bodyFormData.append('vehicleType', vehicleType)
+ */ bodyFormData.append('securityHold', securityHold)
     bodyFormData.append('price', price)
     bodyFormData.append('inssurance', inssurance)
-/*     bodyFormData.append('features', features)
- */    bodyFormData.append('assurance', assurance)
-
+    /*     bodyFormData.append('features', features)
+ */ bodyFormData.append('assurance', assurance)
 
     const token = localStorage.getItem('token')
-    try{
+    try {
       const response = await createMoto(token, bodyFormData)
       const data = await response.json()
-      console.log(data)
-      resetField("image")
-      resetField("name")
-      resetField("price")
-      resetField("inssurance")
-      resetField("features")
-      resetField("assurance")
-      resetField("vehicleType")
-      resetField("minAge")
-      resetField("model")
-      resetField("vehiclePlate")
+      resetField('image')
+      resetField('name')
+      resetField('price')
+      resetField('inssurance')
+      resetField('features')
+      resetField('assurance')
+      resetField('vehicleType')
+      resetField('minAge')
+      resetField('model')
+      resetField('vehiclePlate')
       ConfirmModal()
-    }catch(error){
-      console.log(error)
-    }   
-}
+    } catch (error) {
+    }
+  }
   return (
     <>
       <Modal
@@ -91,16 +88,16 @@ export default function AddMoto ({
           <Modal.Body>
             <div className='row'>
               <div className='col-md-4 d-flex flex-column align-items-center'>
-             
-              <label htmlFor="file-input">
-                <i class="fa fa-cloud-upload upload-icon card-body"></i> 
-                <input
-                  id="file-input"
-                  className="d-none"
-                  type="file"
-                  name="upload moto"
-                  {...register("image", { require: false })}
-                />
+
+                <label htmlFor='file-input'>
+                  <i class='fa fa-cloud-upload upload-icon card-body' />
+                  <input
+                    id='file-input'
+                    className='d-none'
+                    type='file'
+                    name='upload moto'
+                    {...register('image', { require: false })}
+                  />
                 </label>
                 <div className='mb-2 mt-4'>
                   <div className='form-check mb-2'>

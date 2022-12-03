@@ -1,48 +1,64 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Grid, _ } from "gridjs-react";
+import { Grid, _, h } from "gridjs-react";
 import Image from "next/image";
 import { getAllMotos } from "/services/motos/motos";
 import AddMoto from "./AddMoto";
+import { deleteMoto } from '/services/motos/motos'
+import ConfirmModal from "../../ConfirmModal";
+import { useRouter } from "next/router";
 
 const myLoader = ({ src }) => {
   return `${src}`;
 };
 
 export default function Motos() {
-  const tableRef = useRef(null);
-  const wrapperRef = useRef(null);
-  //const [reserves, setReserves] = useState([]);
+  
+  const [data, setData] = useState([]);  
+  const [addMoto, setAddMoto] = useState(false);
+  const handleClose = () => setAddMoto(false);
+  
+  let hideCloseConfirm;
 
-  const row = (motos) =>
+  const setHandleClosed = (handleClosed) => {
+    hideCloseConfirm = handleClosed
+  }
+
+  const transformDataToRow = (motos) =>
     motos.map((moto) => [
       moto.image,
       moto.name,
       moto.vehicleType,
       moto.price,
       moto.vehiclePlate,
-    ]);
-  const [data, setData] = useState([]);
-
-  const [pageSize, setPageSize] = React.useState(5);
+      moto._id
+  ]);
 
   const getMotos = async () => {
     const token = localStorage.getItem("token");
-    /* const user = localStorage.getItem("userCurrent");
-    const { id, slug } = JSON.parse(user); */
     try {
       const response = await getAllMotos(token);
-      const { data: { motos }} = await response.json()
-      setData(row(motos));
-      const rows = [];
-    } catch (error) {
-    }
+      const {
+        data: { motos },
+      } = await response.json();
+      setData(transformDataToRow(motos));
+    } catch (error) {}
   };
   useEffect(() => {
     getMotos();
   }, []);
-  const [addMoto, setAddMoto] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const handleClose = () => setAddMoto(false);
+
+  const handleDelete = async (del) => {
+    const token = localStorage.getItem('token')
+    try {
+      const response = await deleteMoto(token, del)
+      const dataJson = await response.json()
+      if (dataJson.success === true) {
+        setData(data.filter(m => m[5] !== del));
+        hideCloseConfirm()
+      }
+    } catch (error) {}
+  }
+
   return (
     <>
       <section>
@@ -70,22 +86,54 @@ export default function Motos() {
                         formatter: (cell) =>
                           _(
                             <Image
-                            loader={myLoader}
-                            src={`${cell}`}
-                            alt="moto img"
-                            width={80}
-                            height={80}
-                          />
+                              loader={myLoader}
+                              src={`${cell}`}
+                              alt="moto img"
+                              width={80}
+                              height={80}
+                            />
                           ),
                       },
                       { id: "name", name: "Vehículo" },
                       { id: "vehicleType", name: "Categoría" },
                       { id: "price", name: "Precio por día" },
                       { id: "vehiclePlate", name: "Placas" },
-                      { name: "Actions" },
+                      {
+                        id:"id", name: "Actions",
+                        formatter: (cell) =>
+                          _(
+                            
+                             <ConfirmModal modalConfig={{
+                                question: '¿Desea eliminar una moto?',
+                                yes: 'Sí',
+                                no: 'No',
+                                button: 'iconTrash',
+                                callback: () =>{ 
+                                  handleDelete(cell)
+                                },
+                                setCloseFunction: (func) =>{ 
+                                  setHandleClosed(func)
+                                }
+                              }} 
+                            /> 
+                            
+
+                           /*  <button className="btn"
+                           onClick={shows}
+                            >
+                              <Image
+                                className="me-3"
+                                src="/assets/icons/trash-icon.webp"
+                                alt="trash icon"
+                                width={28}
+                                height={28}
+                              />
+                            </button> */
+                          ),
+                      },
                     ]}
-                    search={true}
-                    sort={true}
+                    search
+                    sort
                     pagination={{
                       enabled: true,
                       limit: 10,

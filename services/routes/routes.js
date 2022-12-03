@@ -5,13 +5,27 @@ function getAllRoutes () {
   const options = {
     method: 'GET',
     headers: {
-        'Content-Type': 'application/json'
+      'Content-Type': 'application/json'
     },
     mode: 'cors'
+  }
+  return fetch(URL, options)
 }
-return fetch(URL, options)
+
+function deleteRoute (token, id) {
+  const URL = `${URL_BASE}routes/${id}`
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    },
+    mode: 'cors'
+  }
+  return fetch(URL, options)
 }
 
 export {
-  getAllRoutes
+  getAllRoutes,
+  deleteRoute
 }
