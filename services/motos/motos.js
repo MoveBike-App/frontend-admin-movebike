@@ -27,4 +27,20 @@ function createMoto (token, data) {
   return fetch(URL, options)
 }
 
-export { getAllMotos, createMoto }
+function deleteMoto (token, id) {
+  const URL = `${URL_BASE}motos/${id}`
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    },
+    mode: 'cors'
+  }
+  return fetch(URL, options)
+}
+
+export { 
+  getAllMotos,
+  createMoto,
+  deleteMoto }

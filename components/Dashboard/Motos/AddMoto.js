@@ -54,7 +54,6 @@ export default function AddMoto ({
     try {
       const response = await createMoto(token, bodyFormData)
       const data = await response.json()
-      console.log(data)
       resetField('image')
       resetField('name')
       resetField('price')
@@ -67,7 +66,6 @@ export default function AddMoto ({
       resetField('vehiclePlate')
       ConfirmModal()
     } catch (error) {
-      console.log(error)
     }
   }
   return (

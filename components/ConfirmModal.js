@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-export default function ConfirmModal({ modalConfig }) {
+export default function ConfirmModal({ modalConfig}) {
+  
   const signOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userCurrent");
@@ -16,9 +17,12 @@ export default function ConfirmModal({ modalConfig }) {
   const router = useRouter();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const handleClosed = () => setShow(false);
   function getDefaultConfig(modalConfig) {
     if (modalConfig) {
+      if(modalConfig.setCloseFunction){
+        modalConfig.setCloseFunction(() => setShow(false));
+      }
       return modalConfig;
     }
     modalConfig = {
@@ -32,32 +36,28 @@ export default function ConfirmModal({ modalConfig }) {
   }
   return (
     <>
-      {modalConfig.button == "iconType" ? (
-        <i
-          className="fas nav-dashboard__signOut fa-sign-out-alt d-none d-md-block"
+      {modalConfig.button == "iconType" 
+      ? (<i className="fas nav-dashboard__signOut fa-sign-out-alt d-none d-md-block"
           onClick={handleShow}
-        />
-      ) : <button className=" btn route__btns " onClick={handleShow}>
+        />) 
+      : modalConfig.button == "iconDelete" 
+      ? <button className=" btn route__btns " onClick={handleShow}>
           Eliminar
-        </button> ? (
-        <button onClick={handleShow}>
-          <Image
-            className="me-3"
-            src="/assets/icons/trash-icon.webp"
-            alt="trash icon"
-            width={28}
-            height={28}
-          />
+        </button> 
+      : (<button 
+        className="btn"
+          onClick={handleShow}>
+          <i class="fa fa-trash" aria-hidden="true"></i>
         </button>
-      ) : null}
-      <Modal className="w-100" show={show} onHide={handleClose}>
+      )}
+      <Modal className="w-100" show={show} onHide={handleClosed}>
         <Modal.Header closeButton className="btn__close-modal" />
         <Modal.Body className="text-center">{modalConfig.question}</Modal.Body>
         <Modal.Footer>
           <div className="mx-auto">
             <Button
               className="me-2 btn-movebike contained btn__confirm-modal"
-              onClick={handleClose}
+              onClick={handleClosed}
             >
               {modalConfig.no}
             </Button>

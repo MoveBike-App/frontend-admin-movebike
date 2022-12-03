@@ -17,7 +17,6 @@ export default function LoginCard () {
     try {
       const response = await authLogin({ email, password })
       const data = await response.json()
-      console.log(data)
       const token = data.token
       const { id, name, role } = data.userCurrent
       const userCurrent = { id, company: name, token, role }
@@ -27,7 +26,6 @@ export default function LoginCard () {
       router.push(returnUrl)
     } catch (error) {
       setIsError(true)
-      console.log(error)
     }
   }
 
