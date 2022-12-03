@@ -2,21 +2,18 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
-import CustomDay from '../General/CustomDay'
 import BookedCategory from './BookedCategory'
 const iconUpload = '/assets/icons/icon-upload.webp'
 
 export default function BookDetail ({
-  title,
-  body,
   show,
-  edit,
-  setShow,
   handleClick,
   handleClose,
-  handleShow,
   reserve
 }) {
+  if(!reserve){
+    reserve = {}
+  }
   return (
     <>
       <Modal
@@ -30,7 +27,7 @@ export default function BookDetail ({
       >
         <Modal.Header closeButton>
           <Modal.Title id='contained-modal-title-vcenter'>
-            Reserva #{reserve._id}
+            Reserva #{reserve ? reserve.reserveNumber : '' }
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -38,9 +35,10 @@ export default function BookDetail ({
             <div class='row'>
               <div class='col-md-6 col-xs-12 mb-2'>
                 <h6>Detalles de reserva</h6>
-                <p class='mb-0'>Joe Doe</p>
-                <p class='mb-0'>Cancún</p>
-                <p>Hotel Riu Palace, Mexico</p>
+                <p class='mb-0'>{reserve.customer ? reserve.customer.name : 'null'}</p>
+                <p class='mb-0'>Cancún, Quintana Roo</p>
+                <p>{reserve.customer ? reserve.customer.location : '' }</p>
+                
               </div>
               <div class='col-md-6 col-xs-12 mb-3'>
                 <h6>Pagó por </h6>
@@ -50,11 +48,11 @@ export default function BookDetail ({
               <div class='d-none d-xs-block  d-sm-block mt-3' />
               <div class='col-md-6 col-xs-12 mb-2 '>
                 <h6>Email</h6>
-                <p>joedoe.2569@yahoo.com</p>
+                <p>{reserve.customer ? reserve.customer.email : ''}</p>
               </div>
               <div class='col-md-6 col-xs-12 mb-2'>
                 <h6>Teléfono</h6>
-                <p>+52 598-562-5625</p>
+                <p>{reserve.customer ? reserve.customer.phone : '' }</p>
               </div>
             </div>
             <hr className='me-0 ms-0' />
@@ -63,15 +61,15 @@ export default function BookDetail ({
                 <h6>Producto</h6>
                 <BookedCategory
                   title='Nombre'
-                  description='Scooter Sport 150'
+                  description={reserve.customer ? reserve.vehicle.name : ''}
                 />
                 <BookedCategory
                   title='Fecha inicio:'
-                  description='01/20/2022'
+                  description={reserve ? reserve.initialDate : ''}
                 />
                 <BookedCategory
                   title='Fecha fin:'
-                  description='03/20/2022'
+                  description={reserve ? reserve.finalDate : ''}
                 />
                 <BookedCategory
                   title='Días:'
@@ -88,7 +86,7 @@ export default function BookDetail ({
               </div>
               <div className='col-md-4 text-center'>
                 <h6>Total</h6>
-                <h5 className='mt-3'>$5000.00</h5>
+                <h5 className='mt-3'>$ {reserve.totalPrice}.00 <p className='mt-1'>MXN</p></h5>
               </div>
             </section>
           </section>
