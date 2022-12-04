@@ -40,7 +40,8 @@ function deleteMoto (token, id) {
   return fetch(URL, options)
 }
 
-export { 
+export {
   getAllMotos,
   createMoto,
-  deleteMoto }
+  deleteMoto
+}

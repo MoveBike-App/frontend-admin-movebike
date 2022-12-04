@@ -49,7 +49,6 @@ export default function AddMoto ({
     bodyFormData.append('inssurance', inssurance)
     /*     bodyFormData.append('features', features)
  */ bodyFormData.append('assurance', assurance)
-
     const token = localStorage.getItem('token')
     try {
       const response = await createMoto(token, bodyFormData)
