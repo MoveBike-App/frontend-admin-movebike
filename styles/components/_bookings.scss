@@ -44,3 +44,37 @@
 .status-dropdown{
   min-width: 150px;
 }
+
+.book-status-change{
+  width: 100%;
+  min-width:fit-content;
+}
+
+.BookDetail .modal-dialog {
+    max-width: 60% !important ;
+}
+
+.status-pill{
+  background-color: variables.$orange-600 !important ;
+  color: white !important;
+  font-size: 14px;
+  min-width:90px;
+  max-width:100px;
+  font-weight: 500;
+  letter-spacing: .2px;
+  width: 100%;
+}
+
+.number-pill{
+  font-size: 14px;
+  font-weight: 600;
+  min-width:90px;
+  max-width:100px;
+  width: 100%;
+}
+
+.edit-icon{
+  color: variables.$orange-600;
+  width: 20px !important;
+  height: 20px !important;
+}

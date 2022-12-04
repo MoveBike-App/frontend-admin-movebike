@@ -1,5 +1,4 @@
 import { Modal } from 'bootstrap'
-import Image from 'next/image'
 import React from 'react'
 
 export default function MessageModal ({ show, body, setShow, handleClick, handleClose }) {

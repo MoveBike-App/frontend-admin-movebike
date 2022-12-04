@@ -4,7 +4,7 @@ import { getAllRoutes } from '/services/routes/routes'
 
 export default function Route () {
   const [routes, setRoutes] = useState([])
-  
+
   const getRoutes = async () => {
     try {
       const response = await getAllRoutes()
@@ -18,7 +18,6 @@ export default function Route () {
   useEffect(() => {
     getRoutes()
   }, [])
- 
 
   return (
     <section className='container'>
