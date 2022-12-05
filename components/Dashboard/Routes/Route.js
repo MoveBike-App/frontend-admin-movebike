@@ -7,14 +7,20 @@ const myLoader = ({ src }) => {
   return `${src}`
 }
 
-export default function Post ({ title, image, deletePost, deleteRouteState }) {
+export default function Post ({ post, deleteRouteState,showFormEdit}) {
+  let hideCloseConfirm;
+
+  const setHandleClosed = (handleClosed) => {
+    hideCloseConfirm = handleClosed;
+  };
   const handleDelete = async () => {
     const token = localStorage.getItem('token')
     try {
-      const response = await deleteRoute(token, deletePost)
+      const response = await deleteRoute(token, post._id)
       const data = await response.json()
       if (data.success === true) {
-        deleteRouteState(deletePost)
+        deleteRouteState(post._id)
+        hideCloseConfirm();
       }
     } catch (error) {}
   }
@@ -23,7 +29,10 @@ export default function Post ({ title, image, deletePost, deleteRouteState }) {
     yes: 'Sí',
     no: 'No',
     button: 'iconDelete',
-    callback: handleDelete
+    callback: handleDelete,
+    setCloseFunction: (func) => {
+      setHandleClosed(func);
+    }
   }
   return (
     <>
@@ -32,11 +41,11 @@ export default function Post ({ title, image, deletePost, deleteRouteState }) {
           <div className='px-4 pt-3'>
             <div className='d-flex'>
               <div className='card-body text-center'>
-                <h2 className='article__title text-center'>{title}</h2>
+                <h2 className='article__title text-center'>{post.title}</h2>
                 <Image
                   className='route__img mt-3'
                   loader={myLoader}
-                  src={`${image}`}
+                  src={`${post.image}`}
                   alt='route img'
                   width={300}
                   height={200}
@@ -44,12 +53,14 @@ export default function Post ({ title, image, deletePost, deleteRouteState }) {
               </div>
             </div>
             <div className='d-flex justify-content-center route'>
-              <button className=' btn route__btns'>Editar</button>
+              <button className=' btn route__btns'
+              onClick={() => {
+                showFormEdit(post)
+              }}
+              >Editar</button>
 
               <ConfirmModal modalConfig={modalConfig} />
-              <button className=' btn btn-movebike route__btn outlined'>
-                Ver más
-              </button>
+           
               <div className=''>
                 {/*  <h5 className='lh-lg'>
                     {description}

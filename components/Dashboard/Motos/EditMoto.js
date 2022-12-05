@@ -12,7 +12,6 @@ export default function EditAMoto({
   show,
   handleClose,
   handleClick,
-  onHide,
   moto,
   refreshTable
 }) {
@@ -53,7 +52,7 @@ export default function EditAMoto({
   }
 
   async function  updateMoto (moto)  {
-    var bodyFormData = getFormFromData(moto);
+    const bodyFormData = getFormFromData(moto);
     const token = localStorage.getItem("token");
 
     try {
