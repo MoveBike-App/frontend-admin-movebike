@@ -13,12 +13,12 @@ export default function AddMoto ({
   show,
   edit = false,
   handleClick,
-  handleClose
+  handleClose,
+  refreshTable
 }) {
   const router = useRouter()
   const {
     register,
-    resetField,
     formState: { errors },
     handleSubmit
   } = useForm()
@@ -29,8 +29,8 @@ export default function AddMoto ({
     vehiclePlate,
     model,
     minAge,
-    /*     vehicleType,
- */ securityHold,
+    vehicleType,
+    securityHold,
     price,
     inssurance,
     features,
@@ -43,8 +43,8 @@ export default function AddMoto ({
     bodyFormData.append('vehiclePlate', vehiclePlate)
     bodyFormData.append('model', model)
     bodyFormData.append('minAge', minAge)
-    /*     bodyFormData.append('vehicleType', vehicleType)
- */ bodyFormData.append('securityHold', securityHold)
+    bodyFormData.append('vehicleType', vehicleType)
+    bodyFormData.append('securityHold', securityHold)
     bodyFormData.append('price', price)
     bodyFormData.append('inssurance', inssurance)
     /*     bodyFormData.append('features', features)
@@ -52,18 +52,11 @@ export default function AddMoto ({
     const token = localStorage.getItem('token')
     try {
       const response = await createMoto(token, bodyFormData)
-      const data = await response.json()
-      resetField('image')
-      resetField('name')
-      resetField('price')
-      resetField('inssurance')
-      resetField('features')
-      resetField('assurance')
-      resetField('vehicleType')
-      resetField('minAge')
-      resetField('model')
-      resetField('vehiclePlate')
-      ConfirmModal()
+      const jsonData = await response.json()
+      if(jsonData.success){
+        refreshTable(jsonData.data.moto)
+      }
+      
     } catch (error) {
     }
   }
@@ -95,7 +88,7 @@ export default function AddMoto ({
                     className='d-none'
                     type='file'
                     name='upload moto'
-                    {...register('image', { require: false })}
+                    {...register('image', { require: true })}
                   />
                 </label>
                 <div className='mb-2 mt-4'>
@@ -195,13 +188,13 @@ export default function AddMoto ({
                   <label className='form-label login__label'>
                     Tipo de moto
                   </label>
-                  <select className='form-select'>
-                    <option value='' selected disabled>
-                      -- Selecciona una opción
-                    </option>
-                    <option value='Scooter'>Scooter</option>
-                    <option value='Moto'>Moto</option>
-                    <option value='Bicicleta'>Bicicleta</option>
+                  <select className='form-select'
+                  {...register('vehicleType', { require: true })}
+                  >
+                    <option value='' selected>Seleccione una opción</option>
+                    <option value='scooter'>Scooter</option>
+                    <option value='moto'>Moto</option>
+                    <option value='bicicleta'>Bicicleta</option>
                   </select>
                 </div>
                 <div className='mb-2'>
