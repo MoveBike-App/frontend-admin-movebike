@@ -45,10 +45,10 @@ export default function ConfirmModal ({ modalConfig }) {
             Eliminar
           </button>
           : (<button
-              className='btn'
+              className='btn btn-movebike border-0 crud-icons'
               onClick={handleShow}
              >
-            <i class='fa fa-trash' aria-hidden='true' />
+            <i class='fa fa-trash edit-icon fa-lg crud-icons' aria-hidden='true' />
              </button>
             )}
       <Modal className='w-100' show={show} onHide={handleClosed}>
