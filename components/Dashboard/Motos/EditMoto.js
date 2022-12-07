@@ -1,68 +1,87 @@
 import Image from "next/image";
-
-import React, { useState } from "react";
+import React, { useState, useEffect,useMemo } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import CustomDay from "../General/CustomDay";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import FormData from "form-data";
-import { createMoto } from "../../../services/motos/motos";
-import { className } from "gridjs";
+import { editMoto } from "../../../services/motos/motos";
 
 const myLoader = ({ src }) => {
   return `${src}`
 }
 
-export default function AddMoto({
-  show,
+export default function EditAMoto({
   edit = false,
-  handleClick,
+  show,
   handleClose,
-  refreshTable,
+  handleClick,
+  moto,
+  refreshTable
 }) {
-  const router = useRouter();
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
 
-  const onSubmit = async ({
-    image,
-    name,
-    vehiclePlate,
-    model,
-    minAge,
-    vehicleType,
-    securityHold,
-    price,
-    inssurance,
-    features,
-    assurance,
-  }) => {
-    const bodyFormData = new FormData();
-    bodyFormData.append("image", image["0"]);
-    bodyFormData.append("name", name);
-    bodyFormData.append("vehiclePlate", vehiclePlate);
-    bodyFormData.append("model", model);
-    bodyFormData.append("minAge", minAge);
-    bodyFormData.append("vehicleType", vehicleType);
-    bodyFormData.append("securityHold", securityHold);
-    bodyFormData.append("price", price);
-    bodyFormData.append("inssurance", inssurance);
-    /*     bodyFormData.append('features', features)
-     */ bodyFormData.append("assurance", assurance);
+  const [isEdit, setIsEdit] = useState(false);
+    const updateDataList = ["name","vehiclePlate","totalReserves","model","minAge","securityHold","price","inssurance","image","vehicleType"]
 
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+        reset
+    } = useForm({
+        defaultValues: useMemo(() => {
+        return moto;
+        }, [moto])
+    });
+
+
+    useEffect(() => {
+      if (!moto) {
+        moto = undefined;
+        reset();
+        setImgData(null);
+        setIsEdit(false);
+      } else {
+        reset(moto);
+        setIsEdit(true);
+        if (moto.image) {
+          setImgData(moto.image);
+        }
+      }
+    }, [moto]);
+  function getFormFromData(data){
+    let bodyFormData = new FormData();
+    for( const key of updateDataList ){
+        if(data[key]){
+            if(key==="image"){
+                if(data[key].constructor.name === "FileList"){
+                    bodyFormData.append(key, data[key][0]);
+                }
+            }else{
+                bodyFormData.append(key, data[key]);
+            }
+        }
+    }
+    return bodyFormData;
+  }
+
+  async function  updateMoto (moto)  {
+    const bodyFormData = getFormFromData(moto);
     const token = localStorage.getItem("token");
+
     try {
-      const response = await createMoto(token, bodyFormData);
+      const response = await editMoto(token, moto._id, bodyFormData);
       const jsonData = await response.json();
-      if (jsonData.success) {
+      if(jsonData.success){
         refreshTable(jsonData.data.moto);
       }
-    } catch (error) {}
-  };
+    } catch (error) {
+    }
+  }
+
+  const onSubmit = (data) => {
+    updateMoto(data);
+  }
 
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
@@ -91,23 +110,22 @@ export default function AddMoto({
         <form onSubmit={handleSubmit(onSubmit)}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Crear una nueva moto
+              Editar {moto.name}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-              <div className="col-md-4 d-flex flex-column align-items-center">
-                <label htmlFor="file-input" >
+             <div className="col-md-4 d-flex flex-column align-items-center">
+                <label htmlFor="file-input">
                   <div className="flex">
-                    <div>
-                  <i class="fa fa-cloud-upload upload-icon card-body "  />
+                  <i class="fa fa-cloud-upload upload-icon card-body" />
                   <input
                     id="file-input"
                     className="d-none"
                     type="file"
                     name="upload moto"
                     {...register("image", {
-                      require: true,
+                      require: false,
                       onChange: (e) => handleChange(e),
                     })}
                   />
@@ -128,9 +146,7 @@ export default function AddMoto({
                   }
                 
                         </div>
-                        </div>
                 </label>
-
                 <div className="mb-2 mt-4">
                   <div className="form-check mb-2">
                     <input
@@ -170,7 +186,11 @@ export default function AddMoto({
                 </div>
                 <div className="mb-2">
                   <label className="form-label">Cantidad de motos</label>
-                  <input type="number" className="form-control" />
+                  <input
+                    type="number"
+                    className="form-control login__input"
+                    {...register("totalReserves", { require: true })}
+                  />
                 </div>
                 <div className="mb-2">
                   <label className="form-label login__label">
@@ -189,6 +209,7 @@ export default function AddMoto({
                   <input
                     type="text"
                     className="form-control login__input"
+                    name="securityHold"
                     {...register("securityHold", { require: true })}
                   />
                 </div>
@@ -199,7 +220,8 @@ export default function AddMoto({
                   <input
                     type="text"
                     className="form-control login__input"
-                    {...register("assurance", { require: true })}
+                    name="inssurance"
+                    {...register("inssurance", { require: true })}
                   />
                 </div>
               </div>
@@ -228,13 +250,10 @@ export default function AddMoto({
                   <label className="form-label login__label">
                     Tipo de moto
                   </label>
-                  <select
-                    className="form-select"
-                    {...register("vehicleType", { require: true })}
+                  <select className="form-select"
+                {...register('vehicleType', { require: true })}
                   >
-                    <option value="" selected>
-                      Seleccione una opción
-                    </option>
+                    <option value="">Seleccione una opción</option>
                     <option value="scooter">Scooter</option>
                     <option value="moto">Moto</option>
                     <option value="bicicleta">Bicicleta</option>

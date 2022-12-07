@@ -1,6 +1,4 @@
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Image from 'next/image'
+import { Modal } from 'bootstrap'
 import React from 'react'
 
 export default function MessageModal ({ show, body, setShow, handleClick, handleClose }) {
