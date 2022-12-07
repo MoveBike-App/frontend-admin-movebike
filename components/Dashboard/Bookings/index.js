@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, _ } from 'gridjs-react'
+import Image from 'next/image'
 import BookDetail from '../../Dashboard/Bookings/BookDetail'
 import 'gridjs/dist/theme/mermaid.css'
-import Image from 'next/image'
 import { format } from "date-fns";
 import es from "date-fns/locale/es";
 import { getAllReserves } from '/services/reserves/reserves'
@@ -26,10 +26,10 @@ export default function Bookings () {
   
   const row = (reserves) =>
     reserves.map((reserva) => [
-      reserva.vehicle.image,
+      (reserva.vehicle?reserva.vehicle.image:"Reserva prueba"),
       reserva.reserveNumber,
-      reserva.customer.name,
-      reserva.totalPrice,
+      (reserva.customer?reserva.customer.name:"Reserva prueba"),
+      `$ ${reserva.totalPrice}`,
       reserva.status,
       reserva.initialDate
       ? format(new Date(reserva.initialDate), "dd/MM/yyyy H:mm b", {
@@ -42,8 +42,10 @@ export default function Bookings () {
       })
     : "N/A",
   null,
-      reserva
+      reserva,
+      console.log(reserva)
     ])
+    
   const [reserves, setReserves] = useState([])
   const [data, setData] = useState([])
 
@@ -52,12 +54,14 @@ export default function Bookings () {
     const user = localStorage.getItem('userCurrent')
     try {
       const response = await getAllReserves(token)
+      console.log(response);
       const {
         data: { reserves }
       } = await response.json()
+      console.log(data);
       setData(row(reserves))
       setReserves(reserves)
-    } catch (error) {}
+    } catch (error) {console.log(error);}
   }
 
   const refreshTable = (reserve) => {
