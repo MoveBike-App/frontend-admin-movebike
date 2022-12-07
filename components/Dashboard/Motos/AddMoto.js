@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -7,6 +8,11 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import FormData from "form-data";
 import { createMoto } from "../../../services/motos/motos";
+import { className } from "gridjs";
+
+const myLoader = ({ src }) => {
+  return `${src}`
+}
 
 export default function AddMoto({
   show,
@@ -57,6 +63,20 @@ export default function AddMoto({
       }
     } catch (error) {}
   };
+
+  const [picture, setPicture] = useState(null);
+  const [imgData, setImgData] = useState(null);
+ 
+  const handleChange = (e) => {
+    if (e.target.files[0]) {
+      setPicture(e.target.files[0]);
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        setImgData(reader.result);
+      });
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
   return (
     <>
       <Modal
@@ -77,16 +97,40 @@ export default function AddMoto({
           <Modal.Body>
             <div className="row">
               <div className="col-md-4 d-flex flex-column align-items-center">
-                <label htmlFor="file-input">
-                  <i class="fa fa-cloud-upload upload-icon card-body" />
+                <label htmlFor="file-input" >
+                  <div className="flex">
+                    <div>
+                  <i class="fa fa-cloud-upload upload-icon card-body "  />
                   <input
                     id="file-input"
                     className="d-none"
                     type="file"
                     name="upload moto"
-                    {...register("image", { require: true })}
+                    {...register("image", {
+                      require: true,
+                      onChange: (e) => handleChange(e),
+                    })}
                   />
+                  <label htmlFor="file-input" className="mt-1">
+                    Select file...
+                  </label>
+                  </div>
+                  <div className="text-center">
+                    {imgData
+                    ? <Image
+                    loader={myLoader}
+                    src={imgData}
+                    alt='moto img'
+                    width={85}
+                    height={85}
+                  /> 
+                  :''
+                  }
+                
+                        </div>
+                        </div>
                 </label>
+
                 <div className="mb-2 mt-4">
                   <div className="form-check mb-2">
                     <input

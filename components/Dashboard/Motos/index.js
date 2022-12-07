@@ -31,7 +31,8 @@ export default function Motos() {
       moto.image,
       moto.name,
       moto.vehicleType,
-      moto.price,
+      `$ ${moto.price}`,
+      moto.model,
       moto.vehiclePlate,
       moto,
       moto._id
@@ -83,7 +84,7 @@ export default function Motos() {
 
   return (
     <>
-      <section>
+      <section className="container-fluid bookings">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -118,7 +119,8 @@ export default function Motos() {
                       },
                       { id: "name", name: "Vehículo" },
                       { id: "vehicleType", name: "Categoría" },
-                      { id: "price", name: "Precio por día" },
+                      { id: "price", name: "Precio/día" },
+                      { id: "model", name: "Modelo" },
                       { id: "vehiclePlate", name: "Placas" },
                       {
                         id: "id",
@@ -126,13 +128,13 @@ export default function Motos() {
                         formatter: (cell) =>
                           _(
                             <div className="text-center">
-                              <button className="btn btn-movebike border-0"
+                              <button className="btn btn-movebike border-0 crud-icons"
                               onClick={() => {
                                 setCurrentMoto(cell)
                                 setShowEditMoto(true)
                               }}>
                                 <i
-                                  className="fa fa-xl btn fa-edit edit-icon m-1 border-0"
+                                  className="fa fa-xl btn fa-edit edit-icon border-0"
                                   /*  onClick={handleShow} */
                                 />
                               </button>

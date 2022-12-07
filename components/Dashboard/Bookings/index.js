@@ -3,6 +3,8 @@ import { Grid, _ } from 'gridjs-react'
 import BookDetail from '../../Dashboard/Bookings/BookDetail'
 import 'gridjs/dist/theme/mermaid.css'
 import Image from 'next/image'
+import { format } from "date-fns";
+import es from "date-fns/locale/es";
 import { getAllReserves } from '/services/reserves/reserves'
 
 const myLoader = ({ src }) => {
@@ -29,8 +31,17 @@ export default function Bookings () {
       reserva.customer.name,
       reserva.totalPrice,
       reserva.status,
-      reserva.initialDate,
-      reserva.finalDate,
+      reserva.initialDate
+      ? format(new Date(reserva.initialDate), "dd/MM/yyyy H:mm b", {
+        locales: es,
+      })
+    : "N/A",
+      reserva.finalDate
+      ? format(new Date(reserva.finalDate), "dd/MM/yyyy H:mm b", {
+        locales: es,
+      })
+    : "N/A",
+  null,
       reserva
     ])
   const [reserves, setReserves] = useState([])
@@ -63,7 +74,7 @@ export default function Bookings () {
       <div className='container'>
         <div className='row'>
           <div className='col-12'>
-            <h1 className='bookings__title'>Mis reservas</h1>
+            <h1 className='dashboard__title'>Mis reservas</h1>
           </div>
           <div className='col-md-12 mx-auto'>
             <div>
@@ -123,7 +134,7 @@ export default function Bookings () {
                       _(
                         <div>
                           <button
-                            className='btn border-0'
+                            className='btn border-0 crud-icons'
                             onClick={() => {
                               setCurrentBookDetail(cell)
                               setShowReserve(true)
