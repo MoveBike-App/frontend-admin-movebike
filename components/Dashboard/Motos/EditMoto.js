@@ -7,6 +7,10 @@ import { useForm } from "react-hook-form";
 import FormData from "form-data";
 import { editMoto } from "../../../services/motos/motos";
 
+const myLoader = ({ src }) => {
+  return `${src}`
+}
+
 export default function EditAMoto({
   edit = false,
   show,
@@ -16,6 +20,7 @@ export default function EditAMoto({
   refreshTable
 }) {
 
+  const [isEdit, setIsEdit] = useState(false);
     const updateDataList = ["name","vehiclePlate","totalReserves","model","minAge","securityHold","price","inssurance","image","vehicleType"]
 
     const {
@@ -31,10 +36,19 @@ export default function EditAMoto({
 
 
     useEffect(() => {
+      if (!moto) {
+        moto = undefined;
+        reset();
+        setImgData(null);
+        setIsEdit(false);
+      } else {
         reset(moto);
+        setIsEdit(true);
+        if (moto.image) {
+          setImgData(moto.image);
+        }
+      }
     }, [moto]);
-
-
   function getFormFromData(data){
     let bodyFormData = new FormData();
     for( const key of updateDataList ){
@@ -69,6 +83,19 @@ export default function EditAMoto({
     updateMoto(data);
   }
 
+  const [picture, setPicture] = useState(null);
+  const [imgData, setImgData] = useState(null);
+ 
+  const handleChange = (e) => {
+    if (e.target.files[0]) {
+      setPicture(e.target.files[0]);
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        setImgData(reader.result);
+      });
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
   return (
     <>
       <Modal
@@ -90,6 +117,7 @@ export default function EditAMoto({
             <div className="row">
              <div className="col-md-4 d-flex flex-column align-items-center">
                 <label htmlFor="file-input">
+                  <div className="flex">
                   <i class="fa fa-cloud-upload upload-icon card-body" />
                   <input
                     id="file-input"
@@ -97,9 +125,27 @@ export default function EditAMoto({
                     type="file"
                     name="upload moto"
                     {...register("image", {
-                      require: false
+                      require: false,
+                      onChange: (e) => handleChange(e),
                     })}
                   />
+                  <label htmlFor="file-input" className="mt-1">
+                    Select file...
+                  </label>
+                  </div>
+                  <div className="text-center">
+                    {imgData
+                    ? <Image
+                    loader={myLoader}
+                    src={imgData}
+                    alt='moto img'
+                    width={85}
+                    height={85}
+                  /> 
+                  :''
+                  }
+                
+                        </div>
                 </label>
                 <div className="mb-2 mt-4">
                   <div className="form-check mb-2">

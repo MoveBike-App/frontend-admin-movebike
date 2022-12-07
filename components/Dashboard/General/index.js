@@ -28,13 +28,13 @@ export default function General () {
                 reserves='25'
               />
               <TopRentalCard
-                img='/assets/images/flotebikers/vitalia-150.webp'
+                img='/assets/images/flotebikers/blue-scooter.webp'
                 name='Scooter Vitalia 150 Azul'
                 date='Oct 23, 2022'
                 reserves='20'
               />
               <TopRentalCard
-                img='/assets/images/flotebikers/ws-sport-150.webp'
+                img='/assets/images/flotebikers/scooter-blackblue.webp'
                 name='Scooter Vitalia 150 Azul'
                 date='Oct 23, 2022'
                 reserves='15'

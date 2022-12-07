@@ -45,8 +45,11 @@ export default function Route () {
   }
   
   return (
+    <main className='container-fluid bookings'>
     <section className='container'>
-      <h2 className='mt-4'>Rutas turísticas</h2>
+    <div className='col-12 ms-3'>
+      <h2 className='mt-4 dashboard__title'>Rutas turísticas</h2>
+      
       <button
         className='btn btn-movebike contained'
         onClick={() => {
@@ -56,7 +59,7 @@ export default function Route () {
         <i className='fa-solid fa-plus me-2' />
         Agregar ruta
       </button>
-      <main className='container-fluid mt-3'>
+      </div>
         <div className='row mx-auto'>
           {routes
             .map((post) => (
@@ -93,7 +96,7 @@ export default function Route () {
       refreshTable={refreshTable}
       route = {currentRoute}
     />
-      </main>
     </section>
+    </main>
   )
 }

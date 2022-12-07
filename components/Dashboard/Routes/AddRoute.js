@@ -8,13 +8,18 @@ import FormData from "form-data";
 import { createRoute } from "../../../services/routes/routes";
 import { editRoute } from "../../../services/routes/routes";
 
+
+const myLoader = ({ src }) => {
+  return `${src}`
+}
+
 export default function AddRoute({
   show,
   edit = false,
   handleClose,
   handleCloseEdit,
   route,
-  refreshTable
+  refreshTable,
 }) {
   const updateDataList = [
     "title",
@@ -34,26 +39,24 @@ export default function AddRoute({
     reset,
   } = useForm({
     defaultValues: useMemo(() => {
-        return route;
-      }, [route])
+      return route;
+    }, [route]),
   });
 
   useEffect(() => {
-    if(!route){
-        route = undefined
-        reset()
-        setImgData(null)
-        setIsEdit(false)
-    }else{
-        reset(route);
-        setIsEdit(true)
-        if(route.image){
-            setImgData(route.image)
-        }
+    if (!route) {
+      route = undefined;
+      reset();
+      setImgData(null);
+      setIsEdit(false);
+    } else {
+      reset(route);
+      setIsEdit(true);
+      if (route.image) {
+        setImgData(route.image);
+      }
     }
   }, [route]);
-
- 
 
   function getFormFromData(data) {
     let bodyFormData = new FormData();
@@ -72,8 +75,8 @@ export default function AddRoute({
   }
 
   async function createOrUpdateOneRoute(routeData) {
-    if(isEdit && !routeData._id){
-        routeData = routeData.route
+    if (isEdit && !routeData._id) {
+      routeData = routeData.route;
     }
     const bodyFormData = getFormFromData(routeData);
     const token = localStorage.getItem("token");
@@ -87,15 +90,15 @@ export default function AddRoute({
       }
       const jsonData = await response.json();
       if (jsonData.success) {
-        if(isEdit){
-            handleCloseEdit()
-            refreshTable(jsonData.data.route);
-        }else{
-            setImgData(null)
-            refreshTable(jsonData.data);
-            handleClose()
-            route = undefined
-            reset()
+        if (isEdit) {
+          handleCloseEdit();
+          refreshTable(jsonData.data.route);
+        } else {
+          setImgData(null);
+          refreshTable(jsonData.data);
+          handleClose();
+          route = undefined;
+          reset();
         }
       }
     } catch (error) {}
@@ -105,9 +108,9 @@ export default function AddRoute({
     createOrUpdateOneRoute(data);
   };
 
-  const closeWindowForm = () =>{
-    handleClose()
-  }
+  const closeWindowForm = () => {
+    handleClose();
+  };
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
 
@@ -126,7 +129,9 @@ export default function AddRoute({
     <>
       <Modal
         show={show}
-        onHide={()=>{closeWindowForm()}}
+        onHide={() => {
+          closeWindowForm();
+        }}
         size="xl"
         aria-labelledby="contained-modal-title-vcenter"
         backdrop="static"
@@ -140,9 +145,7 @@ export default function AddRoute({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="row p-4">
-              
-              
+            <div className="row px-4 mt-3">
               <div className="col-md-4">
                 <div className="mb-2">
                   <label className="form-label login__label">Título</label>
@@ -160,21 +163,35 @@ export default function AddRoute({
                     {...register("address", { require: true })}
                   />
                 </div>
-               
+
                 <div className="mb-2">
                   <label className="form-label login__label">Imagen</label>
                   <input
                     type="file"
                     className="form-control login__input"
-                    {...register("image", { require: false, onChange: (e) => handleChange(e) })}
+                    {...register("image", {
+                      require: false,
+                      onChange: (e) => handleChange(e),
+                    })}
                   />
-                  <img style={{width: "200px", margin:"auto", marginTop:18, marginBottom:-50, height: "auto", display: "flex"}} className="playerProfilePic_home_tile" src={imgData}  />
+                  <div className="text-center mt-4 mb-0">
+                     {imgData
+                    ? <Image
+                    className="rounded"
+                    loader={myLoader}
+                    src={imgData}
+                    alt='moto img'
+                    width={200}
+                    height={150}
+                  /> 
+                  :''
+                  }
+                  </div>
+              
                 </div>
-
-
               </div>
               <div className="col-md-4">
-              <div className="mb-2">
+                <div className="mb-2">
                   <label className="form-label login__label">Ciudad</label>
                   <input
                     type="text"
@@ -198,12 +215,10 @@ export default function AddRoute({
                     {...register("ZIP", { require: true })}
                   />
                 </div>
-                
-          
               </div>
               <div className="col-md-4 d-flex flex-column align-items-center">
                 <div className="col-12">
-                {/* <label htmlFor="file-input">
+                  {/* <label htmlFor="file-input">
                   <i class="fa fa-cloud-upload upload-icon card-body" />
                   <input
                     id="file-input"
@@ -215,19 +230,18 @@ export default function AddRoute({
                 </label> */}
                 </div>
                 <div className="col-12">
-                <div className='col-auto'>
-            <textarea
-              name='user-message'
-              id='contenido'
-              cols='20'
-              rows='10'
-              className='form-control border-0'
-              placeholder='Descripción de lugar turístico'
-              {...register('description', { required: true })}
-            />
-          </div>
+                  <div className="col-auto">
+                    <textarea
+                      name="user-message"
+                      id="contenido"
+                      cols="20"
+                      rows="10"
+                      className="form-control border-0"
+                      placeholder="Descripción de lugar turístico"
+                      {...register("description", { required: true })}
+                    />
+                  </div>
                 </div>
-                
               </div>
               <div className="col-md-4 offset-md-4 mt-4">
                 {edit && (
@@ -242,10 +256,9 @@ export default function AddRoute({
             <div className="mx-auto">
               <Button
                 className="btn btn-movebike outlined addMotos__btn addMotos__btn--cancel"
-                onClick={()=>{
-                        closeWindowForm()
-                    }
-                }
+                onClick={() => {
+                  closeWindowForm();
+                }}
               >
                 Cancelar
               </Button>
@@ -253,8 +266,6 @@ export default function AddRoute({
                 type="submit"
                 id="addMoto"
                 className="btn btn-movebike contained addMotos__btn addMotos__btn--save"
-                
-                
               >
                 Guardar
               </Button>

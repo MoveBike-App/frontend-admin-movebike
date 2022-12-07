@@ -75,12 +75,11 @@
 
 .edit-icon{
   color: variables.$orange-600;
-  width: 20px !important;
-  height: 20px !important;
+ 
 }
 
 .crud-icons{
   :hover{
-    color: #212529;
+    color: variables.$black-600;
   }
 }
