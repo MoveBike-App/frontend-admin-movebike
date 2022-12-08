@@ -43,7 +43,6 @@ export default function Route () {
     routes[routes.length] = route
     setRoutes(routes)
   }
-  
   return (
     <main className='container-fluid bookings'>
     <section className='container'>
@@ -64,6 +63,7 @@ export default function Route () {
           {routes
             .map((post) => (
               <Post
+                key={post._id}
                 post={post}
                 deleteRouteState={deleteRouteState}
                 refreshTable={refreshTable}
@@ -72,7 +72,9 @@ export default function Route () {
                     setCurrentRoute(route)
                     setEditRoute(true)
                   }
+                  
                 }
+                
               />
             ))
             .reverse()}
