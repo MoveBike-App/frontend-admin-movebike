@@ -17,6 +17,7 @@ StatusDefinition.set('reserved', 'Reservado');
 StatusDefinition.set('onWay', 'En camino');
 StatusDefinition.set('delivered', 'Entregado');
 StatusDefinition.set('canceled', 'Cancelado');
+StatusDefinition.set('backInStock', 'Devuelta');
 
 export default function Bookings () {
   const [showReserve, setShowReserve] = useState(false)
@@ -41,10 +42,9 @@ export default function Bookings () {
         locales: es,
       })
     : "N/A",
-  null,
       reserva,
-      console.log(reserva)
     ])
+    
     
   const [reserves, setReserves] = useState([])
   const [data, setData] = useState([])
@@ -54,14 +54,12 @@ export default function Bookings () {
     const user = localStorage.getItem('userCurrent')
     try {
       const response = await getAllReserves(token)
-      console.log(response);
       const {
         data: { reserves }
       } = await response.json()
-      console.log(data);
       setData(row(reserves))
       setReserves(reserves)
-    } catch (error) {console.log(error);}
+    } catch (error) {}
   }
 
   const refreshTable = (reserve) => {
@@ -113,21 +111,6 @@ export default function Bookings () {
                     formatter: (cell) =>
                       _(
                         <p className='status-pill rounded-pill bg-light p-1 pe-1 ps-1'>{StatusDefinition.get(cell)}</p>
-                        /*   <StatusDropdown
-                        status = {cell}
-                        /> */
-
-                        /*  <div className='mb-2'>
-                        <select className='form-select btn-movebike contained book-status-change'>
-                          <option value='' selected disabled>
-                            {cell}
-                          </option>
-                          <option value='Scooter'>Procesando</option>
-                          <option value='Moto'>En camino</option>
-                          <option value='Bicicleta'>Entregada</option>
-                          <option value='Bicicleta'>Cancelada</option>
-                        </select>
-                      </div> */
                       )
                   },
                   { id: 'initialDate', name: 'Fecha Inicial' },
