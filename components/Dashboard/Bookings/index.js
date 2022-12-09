@@ -3,49 +3,47 @@ import { Grid, _ } from 'gridjs-react'
 import Image from 'next/image'
 import BookDetail from '../../Dashboard/Bookings/BookDetail'
 import 'gridjs/dist/theme/mermaid.css'
-import { format } from "date-fns";
-import es from "date-fns/locale/es";
+import { format } from 'date-fns'
+import es from 'date-fns/locale/es'
 import { getAllReserves } from '/services/reserves/reserves'
 
 const myLoader = ({ src }) => {
   return `${src}`
 }
-export const StatusDefinition = new Map();
+export const StatusDefinition = new Map()
 
-StatusDefinition.set('processing', 'En proceso');
-StatusDefinition.set('reserved', 'Reservado');
-StatusDefinition.set('onWay', 'En camino');
-StatusDefinition.set('delivered', 'Entregado');
-StatusDefinition.set('canceled', 'Cancelado');
-StatusDefinition.set('backInStock', 'Devuelta');
+StatusDefinition.set('processing', 'En proceso')
+StatusDefinition.set('reserved', 'Reservado')
+StatusDefinition.set('onWay', 'En camino')
+StatusDefinition.set('delivered', 'Entregado')
+StatusDefinition.set('canceled', 'Cancelado')
+StatusDefinition.set('backInStock', 'Devuelta')
 
 export default function Bookings () {
   const [showReserve, setShowReserve] = useState(false)
   const [currentBookDetail, setCurrentBookDetail] = useState({})
   const handleClose = () => setShowReserve(false)
-  
-  
+
   const row = (reserves) =>
     reserves.map((reserva) => [
-      (reserva.vehicle?reserva.vehicle.image:"Reserva prueba"),
+      (reserva.vehicle ? reserva.vehicle.image : 'Reserva prueba'),
       reserva.reserveNumber,
-      (reserva.customer?reserva.customer.name:"Reserva prueba"),
+      (reserva.customer ? reserva.customer.name : 'Reserva prueba'),
       `$ ${reserva.totalPrice}`,
       reserva.status,
       reserva.initialDate
-      ? format(new Date(reserva.initialDate), "dd/MM/yyyy H:mm b", {
-        locales: es,
-      })
-    : "N/A",
+        ? format(new Date(reserva.initialDate), 'dd/MM/yyyy H:mm b', {
+          locales: es
+        })
+        : 'N/A',
       reserva.finalDate
-      ? format(new Date(reserva.finalDate), "dd/MM/yyyy H:mm b", {
-        locales: es,
-      })
-    : "N/A",
-      reserva,
+        ? format(new Date(reserva.finalDate), 'dd/MM/yyyy H:mm b', {
+          locales: es
+        })
+        : 'N/A',
+      reserva
     ])
-    
-    
+
   const [reserves, setReserves] = useState([])
   const [data, setData] = useState([])
 
@@ -97,12 +95,14 @@ export default function Bookings () {
                         />
                       )
                   },
-                  { id: 'reserveNumber', name: 'No. Reserva',
-                  formatter: (cell) =>
-                  _(
-                    <p className='number-pill rounded-pill bg-light text-dark p-2 pe-3 ps-3'>{cell}</p>
-                  )
-                },
+                  {
+                    id: 'reserveNumber',
+                    name: 'No. Reserva',
+                    formatter: (cell) =>
+                      _(
+                        <p className='number-pill rounded-pill bg-light text-dark p-2 pe-3 ps-3'>{cell}</p>
+                      )
+                  },
                   { id: 'customer', name: 'Cliente' },
                   { id: 'totalPrice', name: 'Total' },
                   {

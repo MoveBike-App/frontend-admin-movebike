@@ -38,7 +38,7 @@ function deleteRoute (token, id) {
   return fetch(URL, options)
 }
 
-function editRoute (token,id, data) {
+function editRoute (token, id, data) {
   const URL = `${URL_BASE}routes/${id}`
   const options = {
     method: 'PATCH',
@@ -47,7 +47,7 @@ function editRoute (token,id, data) {
       headers: {
         'Content-Type': 'application/json',
         Authorization: token,
-        mode:'cors'
+        mode: 'cors'
       }
     }
   }
@@ -58,5 +58,5 @@ export {
   getAllRoutes,
   createRoute,
   deleteRoute,
-  editRoute,
+  editRoute
 }
