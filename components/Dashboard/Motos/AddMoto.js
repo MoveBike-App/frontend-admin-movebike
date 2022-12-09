@@ -7,7 +7,6 @@ import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import FormData from 'form-data'
 import { createMoto } from '../../../services/motos/motos'
-import { className } from 'gridjs'
 
 const myLoader = ({ src }) => {
   return `${src}`

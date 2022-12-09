@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Grid, _, h } from "gridjs-react";
 import Image from "next/image";
-import { getAllMotos, deleteMoto } from "/services/motos/motos";
-import AddMoto from "./AddMoto";
+import { getAllMotos, deleteMoto } from "../../../services/motos/motos";
+import AddMoto from '../Motos/AddMoto'
 import ConfirmModal from "../../ConfirmModal";
 import EditMoto from "./EditMoto";
 
@@ -18,6 +18,7 @@ export default function Motos () {
   const [currentMoto, setCurrentMoto] = useState({})
   const handleClose = () => setAddMoto(false)
   const handleCloseEdit = () => setShowEditMoto(false)
+  const handleClickSuccess = () => setAddMoto(false)
 
   let hideCloseConfirm
 
@@ -41,12 +42,14 @@ export default function Motos () {
     const token = localStorage.getItem('token')
     try {
       const response = await getAllMotos(token)
+      console.log('res', response);
       const {
         data: { motos }
       } = await response.json()
+      console.log('mot', motos);
       setData(transformDataToRow(motos))
       setMotos(motos)
-    } catch (error) {}
+    } catch (error) {console.log(error);}
   }
   useEffect(() => {
     getMotos()
@@ -188,7 +191,6 @@ export default function Motos () {
         onHide={() => setAddMoto(false)}
         refreshTable={refreshTable}
       />
-
     </>
   )
 }
