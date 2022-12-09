@@ -6,6 +6,7 @@ import AddMoto from './AddMoto'
 import ConfirmModal from '../../ConfirmModal'
 import EditMoto from './EditMoto'
 
+
 const myLoader = ({ src }) => {
   return `${src}`
 }
@@ -184,9 +185,18 @@ export default function Motos () {
         edit={false}
         show={addMoto}
         handleClose={handleClose}
-        handleClick={handleClose}
+        handleClick={handleClickSuccess}
         onHide={() => setAddMoto(false)}
         refreshTable={refreshTable}
+      />
+
+      <MessageModal
+        show={success}
+        handleClose={handleCloseSuccess}
+        handleClick={handleClickSuccess}
+        success={true}
+        msg='¡Tu moto ha sido creado scorrectamente!'
+        onHide={() => setSuccess(false)}
       />
     </>
   )

@@ -12,5 +12,5 @@ export default function MessageModal ({ show, body, setShow, handleClick, handle
         </div>
       </Modal.Body>
     </Modal>
-  )
+  );
 }
