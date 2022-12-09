@@ -6,17 +6,14 @@ import AddRoute from './AddRoute'
 export default function Route () {
   const [currentRoute, setCurrentRoute] = useState({})
   const [routes, setRoutes] = useState([])
-  const [addRoute, setAddRoute] = useState(false);
-  const [editRoute, setEditRoute] = useState(false);
+  const [addRoute, setAddRoute] = useState(false)
+  const [editRoute, setEditRoute] = useState(false)
   const handleClose = () => {
-    setAddRoute(false) 
-  };
+    setAddRoute(false)
+  }
   const handleEditClose = () => {
-    setEditRoute(false) 
-  };
-  
-  
-  
+    setEditRoute(false)
+  }
 
   const getRoutes = async () => {
     try {
@@ -33,11 +30,11 @@ export default function Route () {
   }, [])
 
   const refreshTable = (route) => {
-    for(let i = 0; i < routes.length; i++) {
-      if(routes[i]._id === route._id){
-        routes[i] = route;
-        setRoutes(routes);
-        return;
+    for (let i = 0; i < routes.length; i++) {
+      if (routes[i]._id === route._id) {
+        routes[i] = route
+        setRoutes(routes)
+        return
       }
     }
     routes[routes.length] = route
@@ -45,20 +42,20 @@ export default function Route () {
   }
   return (
     <main className='container-fluid bookings'>
-    <section className='container'>
-    <div className='col-12 ms-3'>
-      <h2 className='mt-4 dashboard__title'>Rutas turísticas</h2>
-      
-      <button
-        className='btn btn-movebike contained'
-        onClick={() => {
-          setAddRoute(true)
-        }}
-      >
-        <i className='fa-solid fa-plus me-2' />
-        Agregar ruta
-      </button>
-      </div>
+      <section className='container'>
+        <div className='col-12 ms-3'>
+          <h2 className='mt-4 dashboard__title'>Rutas turísticas</h2>
+
+          <button
+            className='btn btn-movebike contained'
+            onClick={() => {
+              setAddRoute(true)
+            }}
+          >
+            <i className='fa-solid fa-plus me-2' />
+            Agregar ruta
+          </button>
+        </div>
         <div className='row mx-auto'>
           {routes
             .map((post) => (
@@ -72,33 +69,32 @@ export default function Route () {
                     setCurrentRoute(route)
                     setEditRoute(true)
                   }
-                  
+
                 }
-                
               />
             ))
             .reverse()}
 
         </div>
         <AddRoute
-        edit={false}
-        show={addRoute}
-        handleClose={handleClose}
-        handleClick={handleClose}
-        onHide={handleClose}
-        refreshTable={refreshTable}
-      />
-      <AddRoute
-      edit={false}
-      show={editRoute}
-      handleClose={handleEditClose}
-      handleClick={handleEditClose}
-      onHide={handleEditClose}
-      handleCloseEdit={() => setEditRoute(false)}
-      refreshTable={refreshTable}
-      route = {currentRoute}
-    />
-    </section>
+          edit={false}
+          show={addRoute}
+          handleClose={handleClose}
+          handleClick={handleClose}
+          onHide={handleClose}
+          refreshTable={refreshTable}
+        />
+        <AddRoute
+          edit={false}
+          show={editRoute}
+          handleClose={handleEditClose}
+          handleClick={handleEditClose}
+          onHide={handleEditClose}
+          handleCloseEdit={() => setEditRoute(false)}
+          refreshTable={refreshTable}
+          route={currentRoute}
+        />
+      </section>
     </main>
   )
 }

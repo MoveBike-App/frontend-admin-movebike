@@ -7,12 +7,12 @@ const myLoader = ({ src }) => {
   return `${src}`
 }
 
-export default function Post ({ post, deleteRouteState,showFormEdit}) {
-  let hideCloseConfirm;
+export default function Post ({ post, deleteRouteState, showFormEdit }) {
+  let hideCloseConfirm
 
   const setHandleClosed = (handleClosed) => {
-    hideCloseConfirm = handleClosed;
-  };
+    hideCloseConfirm = handleClosed
+  }
   const handleDelete = async () => {
     const token = localStorage.getItem('token')
     try {
@@ -20,7 +20,7 @@ export default function Post ({ post, deleteRouteState,showFormEdit}) {
       const data = await response.json()
       if (data.success === true) {
         deleteRouteState(post._id)
-        hideCloseConfirm();
+        hideCloseConfirm()
       }
     } catch (error) {}
   }
@@ -31,7 +31,7 @@ export default function Post ({ post, deleteRouteState,showFormEdit}) {
     button: 'iconDelete',
     callback: handleDelete,
     setCloseFunction: (func) => {
-      setHandleClosed(func);
+      setHandleClosed(func)
     }
   }
   return (
@@ -53,21 +53,19 @@ export default function Post ({ post, deleteRouteState,showFormEdit}) {
               </div>
             </div>
             <div className='d-flex justify-content-center route'>
-              <button className=' btn route__btns'
-              onClick={() => {
-                showFormEdit(post)
-              }}
-              >Editar</button>
+              <button
+                className=' btn route__btns'
+                onClick={() => {
+                  showFormEdit(post)
+                }}
+              >Editar
+              </button>
 
               <ConfirmModal modalConfig={modalConfig} />
-           
-              <div className=''>
-             
-              </div>
+
+              <div className='' />
             </div>
-            <div className='identation p-3 pt-2 wrapper-tags'>
-            
-            </div>
+            <div className='identation p-3 pt-2 wrapper-tags' />
           </div>
         </article>
       </div>
