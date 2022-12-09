@@ -36,6 +36,7 @@ export default function StatusDropdown ({
         <option value='onWay'>En camino</option>
         <option value='delivered'>Entregado</option>
         <option value='canceled'>Cancelado</option>
+        <option value='backInStock'>Devuelta</option>
       </select>
     </div>
   )

@@ -37,8 +37,7 @@ export default function Motos() {
       moto.vehiclePlate,
       moto,
       moto._id
-
-    ]);
+    ]).reverse()
 
   const getMotos = async () => {
     const token = localStorage.getItem("token");

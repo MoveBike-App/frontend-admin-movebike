@@ -62,18 +62,11 @@ export default function Post ({ post, deleteRouteState,showFormEdit}) {
               <ConfirmModal modalConfig={modalConfig} />
            
               <div className=''>
-                {/*  <h5 className='lh-lg'>
-                    {description}
-                </h5> */}
-                {/*  <label className='article__down article__down--date d-block ms-1'>
-                Creado el {createdAt}
-              </label> */}
+             
               </div>
             </div>
             <div className='identation p-3 pt-2 wrapper-tags'>
-              {/*           <a href={`http://localhost:3000/posts?id=${comment}`} className='btn article__btn article__btn--action'>
-               */}{' '}
-              {/*  </a> */}
+            
             </div>
           </div>
         </article>

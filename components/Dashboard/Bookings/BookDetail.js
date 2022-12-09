@@ -51,7 +51,7 @@ export default function BookDetail ({
               <div class='col-md-6 col-xs-12 mb-3'>
                 <h6>Pagó por </h6>
                 <p class='mb-0'>Credit Card/Debit Card</p>
-                <p class='mb-0'>(ch_3568fkf598fkkfn268jdjdD)</p>
+                <p class='mb-0'>{reserve ? reserve.payment_id : ''}</p>
               </div>
               
               <div class='d-none d-xs-block  d-sm-block mt-3' />
