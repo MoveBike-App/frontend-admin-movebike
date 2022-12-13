@@ -13,6 +13,19 @@ function getAllReserves (token) {
   return fetch(URL, options)
 }
 
+function getTopRentalReserves (token) {
+  const URL = `${URL_BASE}reserves/filter`
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    },
+    mode: 'cors'
+  }
+  return fetch(URL, options)
+}
+
 function editReserve (token, id, status) {
   const URL = `${URL_BASE}reserves/${id}`
   const options = {
@@ -29,4 +42,4 @@ function editReserve (token, id, status) {
   return fetch(URL, options)
 }
 
-export { getAllReserves, editReserve }
+export { getAllReserves, editReserve, getTopRentalReserves }
