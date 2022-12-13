@@ -69,7 +69,6 @@ export default function EditAMoto ({
 
     try {
       const response = await editMoto(token, moto._id, bodyFormData)
-      console.log('token', token);
       const jsonData = await response.json()
       if (jsonData.success) {
         refreshTable(jsonData.data.moto)

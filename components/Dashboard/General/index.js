@@ -10,16 +10,24 @@ import { Link } from '@mui/material'
 
 export default function General () {
   const [reserves, setReserves] = useState([])
+  const [topReserves, setTopReserves] = useState([])
+  const [cancReserves, setCancReserves] = useState([])
+  const [actReserves, setActReserves] = useState([])
+  const [data, setData] = useState([])
+
   const getTopRentals = async () => {
     const token = localStorage.getItem('token')
     try {
       const response = await getTopRentalReserves(token)
       const { data: { reserves } } = await response.json()
-      setReserves(reserves)
+      setTopReserves(reserves)
     } catch (error) {}
   }
 
  const today = format(new Date(), 'dd/MMM/yyyy')
+ let date = new Date()
+ const strDate = date.toISOString() //los sgeundo cambian
+
 
   useEffect(() => {
     getTopRentals()
@@ -30,12 +38,13 @@ export default function General () {
     const user = localStorage.getItem('userCurrent')
     try {
       const response = await getAllReserves(token)
+      console.log(response);
       const {
         data: { reserves }
       } = await response.json()
-      setData(row(reserves))
+      setData(reserves)
       setReserves(reserves)
-    } catch (error) {}
+    } catch (error) {console.log(error);}
   }
 
   useEffect(() => {
@@ -47,17 +56,45 @@ export default function General () {
     try {
       
       const response = await getAllReserves(token)
+      console.log(response);
       const {
         data: { reserves }
       } = await response.json()
-      setData(row(reserves))
+      const actualReserves = reserves.filter(
+        //THE DATE HAS TO BE DATE.NOW
+        (r) => r.allDates.includes('2022-12-13T06:00:00.000Z') == true
+      )
+      setActReserves(actualReserves)
       setReserves(reserves)
-    } catch (error) {}
+      console.log(actualReserves, reserves);
+    } catch (error) {console.log(error);}
   }
 
   useEffect(() => {
     getActualReserves()
   }, [])
+  
+
+  const getCanceledReserves = async () => {
+    const token = localStorage.getItem('token')
+    try {
+      
+      const response = await getAllReserves(token)
+      const {
+        data: { reserves }
+      } = await response.json()
+      const canceledReserves = reserves.filter(
+        (r) => r.status === 'canceled'
+      )
+      setCancReserves(canceledReserves)
+      setReserves(reserves)
+    } catch (error) {}
+  }
+
+  useEffect(() => {
+    getCanceledReserves()
+  }, [])
+  
 
   return (
     <>
@@ -71,13 +108,13 @@ export default function General () {
               <div className='row'>
                 
                 <CardAmount amount={reserves.length} title='Total de reservas'/>
-                <CardAmount amount='6' title='Reservas actuales' />
-                <CardAmount amount='3' title='Reservas canceladas' />
+                <CardAmount amount={actReserves.length} title='Reservas actuales' />
+                <CardAmount amount={cancReserves.length} title='Reservas canceladas' />
 
               </div>
               <h3 className='mt-5'><i class='fa fa-star-o edit-icon fa-xs me-2' aria-hidden='true' />Top 5 rentals 
  </h3>
-              {reserves
+              {topReserves
               .map((reserve) => (
                 <TopRentalCard
                 key={reserve._id}
