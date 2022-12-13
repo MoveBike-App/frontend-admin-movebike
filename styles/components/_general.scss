@@ -7,6 +7,9 @@
         border-radius: 20px ;
         max-width: 195px;
     }
+    &__topRentalInfo{
+        font-size: 14px !important;
+    }
    &__amount{
     color: variables.$black-700;
 
@@ -36,9 +39,8 @@
         }
     }
 &__cardTopRental{
-   max-width: 700px;
+   max-width: 100%;
     background-color: variables.$gray-background;
-    letter-spacing: .4px;
     border-radius: 0 20px 20px 0;
    border:none;
     &:hover{
