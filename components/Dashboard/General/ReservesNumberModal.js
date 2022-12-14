@@ -5,11 +5,10 @@ import StatusDropdown from './StatusDropdown'
 import Modal from 'react-bootstrap/Modal'
 import BookedCategory from './BookedCategory'
 
-
 export default function BookDetail ({
   show,
   handleClose,
-  reserve,
+  reserve
 }) {
   if (!reserve) {
     reserve = {}
@@ -31,14 +30,10 @@ export default function BookDetail ({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <section className='bookDetail me-3 ms-3 text-center text-md-start'>
-            
-
-            
-          </section>
+          <section className='bookDetail me-3 ms-3 text-center text-md-start' />
         </Modal.Body>
         <Modal.Footer />
-        
+
       </Modal>
     </>
   )
