@@ -13,8 +13,8 @@ function getAllReserves (token) {
   return fetch(URL, options)
 }
 
-function getTopRentalReserves (token) {
-  const URL = `${URL_BASE}reserves/filter`
+function getTopRentalReserves (token,size) {
+  const URL = `${URL_BASE}reserves/filter?size=${size}`
   const options = {
     method: 'GET',
     headers: {

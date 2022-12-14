@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react'
 import CardAmount from './CardAmount'
 import CustomDay from './CustomDay'
 import Search from './Search'
+import BookDetail from '../../Dashboard/Bookings/BookDetail'
 import TopRentalCard from './TopRentalCard'
 import { format } from 'date-fns'
 import { getTopRentalReserves } from '/services/reserves/reserves'
 import { getAllReserves } from '/services/reserves/reserves'
 import { Link } from '@mui/material'
+import RangeEarnPicker from './RangeEarnPicker'
 
 export default function General () {
+  const [showReserve, setShowReserve] = useState(false)
+  const handleClose = () => setShowReserve(false)
   const [reserves, setReserves] = useState([])
   const [topReserves, setTopReserves] = useState([])
   const [cancReserves, setCancReserves] = useState([])
@@ -18,7 +22,7 @@ export default function General () {
   const getTopRentals = async () => {
     const token = localStorage.getItem('token')
     try {
-      const response = await getTopRentalReserves(token)
+      const response = await getTopRentalReserves(token,5)
       const { data: { reserves } } = await response.json()
       setTopReserves(reserves)
     } catch (error) {}
@@ -61,8 +65,7 @@ export default function General () {
         data: { reserves }
       } = await response.json()
       const actualReserves = reserves.filter(
-        //THE DATE HAS TO BE DATE.NOW
-        (r) => r.allDates.includes('2022-12-13T06:00:00.000Z') == true
+        (r) => r.status !== 'canceled' && r.status !== 'backInStock' && r.status !== 'processing'
       )
       setActReserves(actualReserves)
       setReserves(reserves)
@@ -107,8 +110,8 @@ export default function General () {
             <div className='container'>
               <div className='row'>
                 
-                <CardAmount amount={reserves.length} title='Total de reservas'/>
-                <CardAmount amount={actReserves.length} title='Reservas actuales' />
+                <CardAmount amount={reserves.length} title='Total de reservas' onClick={() => alert('hola')} />
+                <CardAmount amount={actReserves.length} title='Reservas activas' />
                 <CardAmount amount={cancReserves.length} title='Reservas canceladas' />
 
               </div>
@@ -135,8 +138,9 @@ export default function General () {
             <div className='container'>
               <div className='row d-flex'>
                 <div className='col-12'>
-                  <Search />
+                  {/* <RangeEarnPicker /> */}
                 </div>
+                
                 <div className='mt-5 card shadow-sm general__datepicker mx-auto'>
                   <h5 className=' mt-4 text-center'>Calendario de reservas</h5>
                   <div className='mt-1 col-12 mx-auto'>
@@ -147,6 +151,13 @@ export default function General () {
             </div>
           </section>
         </div>
+        <BookDetail
+        show={showReserve}
+        edit={false}
+        handleClose={handleClose}
+        handleClick={handleClose}
+        onHide={() => setShowReserve(false)}
+      />
       </section>
     </>
   )
