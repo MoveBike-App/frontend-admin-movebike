@@ -98,8 +98,8 @@ export default function General() {
           <h1 className="m-2 p-0 dashboard__title">General</h1>
 
           <section className="col-12 col-lg-7">
-              <div className="row mb-5">
-                <div className="col-12 d-flex flex-wrap flex-md-row justify-content-around">
+              <div className="row mb-2">
+                <div className="col-12 d-flex flex-column flex-md-wrap flex-md-row justify-content-around">
                 <CardAmount
                     amount={reserves.length}
                     title="Ventas totales"
@@ -144,26 +144,13 @@ export default function General() {
               </div>
           </section>
           <section className="col-12 col-lg-5">
-            <div className="container card-section h-100">
+            <div className="container card-section">
               <div className="row d-flex">
-                <div className="col-12" />
-                <div className="mt-4 card shadow-sm general__datepicker general__datepicker--earns mx-auto mb-4">
-                  <h5 className=" mt-4 text-center fw-bolder">
-                    Ventas $
-                  </h5>
-                  <div className="mt-1 col-12 mx-auto p-4 pb-3">
-                    <DatePickerEarn setGanancias={setGanancias} />
-                    <div class="date-picker-earn-content">
-                      <CardAmount amount={ganancias} title="Ganancias" icon={<i class="fa fa-usd" aria-hidden="true"></i>} />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-5 card shadow-sm general__datepicker mx-auto">
+                <div className=" card shadow-sm general__datepicker mx-auto">
                   <h5 className=" mt-4 text-center fw-bolder">
                     Calendario de reservas
                   </h5>
-                  <div className="mt-1 col-12 mx-auto">
+                  <div className="col-12 mx-auto">
                     <CustomDay />
                   </div>
                 </div>

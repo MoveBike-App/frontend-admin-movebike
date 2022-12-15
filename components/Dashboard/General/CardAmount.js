@@ -8,7 +8,7 @@ export default function CardAmount({ amount, title, icon }) {
           {icon}
         </div>
         <div className="ms-1 d-flex flex-column">
-        <p className="card-analytics__title mb-0">{title}</p>
+        <p className="card-analytics__title text-center mt-1 mb-1">{title}</p>
         <h3 className="card-analytics__amount text-center">{amount}</h3>
         </div>
       </div>
