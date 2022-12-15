@@ -1,9 +1,15 @@
 @use '../abstract/variables';
+@use '../abstract/mixins';
 
 .article {
     font-size: 12px;
-    max-width: 400px;
+    max-width: 350px;
+    max-height: 350px;
     border-radius: 20px;
+
+    @include mixins.responsive(variables.$large) {
+      
+    }
   &__title {
     font-size: 25px;
     font-weight: 700;

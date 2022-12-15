@@ -83,7 +83,7 @@ export default function Motos () {
 
   return (
     <>
-      <section className='container-fluid bookings'>
+      <section className='container-fluid card-section pt-1 pb-5 bookings'>
         <div className='container'>
           <div className='row'>
             <div className='col-12'>

@@ -37,7 +37,7 @@ export default function Post ({ post, deleteRouteState, showFormEdit }) {
   return (
     <>
       <div className='col-md-6 col-lg-4'>
-        <article className='article card mb-2 shadow-sm mt-4'>
+        <article className='article card-section mb-2 mt-4'>
           <div className='px-4 pt-3'>
             <div className='d-flex'>
               <div className='card-body text-center'>
