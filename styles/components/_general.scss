@@ -2,6 +2,8 @@
 @use '../abstract/mixins';
 
 .general{
+    
+
     &__cardAmount{
         border:none;
         border-radius: 20px ;
@@ -74,6 +76,40 @@
 }
 
 }
+
+.card-analytics {
+    max-width: 180px;
+
+    &__icon {
+        padding: 12px;
+        background-color: #FE5F3B;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+
+        i{
+            color: white;
+        }
+    }
+
+    &__title {
+        font-size: 11px;
+    }
+
+    &__amount{
+        color: variables.$gray-600;
+        font-size: 14px;
+    
+        @include mixins.responsive(variables.$large) {
+            font-size: 24px;
+        }
+    }
+
+}
+
 
 .css-1f2kitb-MuiDateRangePickerDay-root {
     background-color: #FE5F3B !important;

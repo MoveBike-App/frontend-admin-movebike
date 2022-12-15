@@ -41,7 +41,7 @@ export default function Route () {
     setRoutes(routes)
   }
   return (
-    <main className='container-fluid bookings'>
+    <main className='container-fluid card-section pt-1 pb-2 bookings'>
       <section className='container'>
         <div className='col-12 ms-3'>
           <h2 className='mt-4 dashboard__title'>Rutas turísticas</h2>
