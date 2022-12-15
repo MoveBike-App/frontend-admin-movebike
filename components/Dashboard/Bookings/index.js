@@ -42,7 +42,7 @@ export default function Bookings () {
         })
         : 'N/A',
       reserva
-    ])
+    ]).reverse()
 
   const [reserves, setReserves] = useState([])
   const [data, setData] = useState([])
@@ -70,7 +70,7 @@ export default function Bookings () {
   }, [])
 
   return (
-    <main className='container-fluid bookings'>
+    <main className='container-fluid card-section  pt-1 pb-5 bookings'>
       <div className='container'>
         <div className='row'>
           <div className='col-12'>

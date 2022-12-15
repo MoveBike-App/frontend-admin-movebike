@@ -23,10 +23,7 @@ export default function AddRoute ({
     'title',
     'image',
     'description',
-    'address',
-    'city',
-    'state',
-    'ZIP'
+    'googleMapsLink'
   ]
   const [isEdit, setIsEdit] = useState(false)
 
@@ -136,6 +133,7 @@ export default function AddRoute ({
         centered
         className='addMotos'
       >
+        
         <form onSubmit={handleSubmit(onSubmit)}>
           <Modal.Header closeButton>
             <Modal.Title id='contained-modal-title-vcenter'>
@@ -144,7 +142,7 @@ export default function AddRoute ({
           </Modal.Header>
           <Modal.Body>
             <div className='row px-4 mt-3'>
-              <div className='col-md-4'>
+              <div className='col-md-6'>
                 <div className='mb-2'>
                   <label className='form-label login__label'>Título</label>
                   <input
@@ -154,11 +152,11 @@ export default function AddRoute ({
                   />
                 </div>
                 <div className='mb-2'>
-                  <label className='form-label login__label'>Dirección</label>
+                  <label className='form-label login__label'>Ubicación</label>
                   <input
                     type='text'
                     className='form-control login__input'
-                    {...register('address', { require: true })}
+                    {...register('googleMapsLink', { require: true })}
                   />
                 </div>
 
@@ -178,53 +176,18 @@ export default function AddRoute ({
                           className='rounded'
                           loader={myLoader}
                           src={imgData}
-                          alt='moto img'
-                          width={200}
-                          height={150}
+                          alt='route img'
+                          width={280}
+                          height={180}
                         />
                       : ''}
                   </div>
 
                 </div>
               </div>
-              <div className='col-md-4'>
-                <div className='mb-2'>
-                  <label className='form-label login__label'>Ciudad</label>
-                  <input
-                    type='text'
-                    className='form-control login__input'
-                    {...register('city', { require: true })}
-                  />
-                </div>
-                <div className='mb-2'>
-                  <label className='form-label login__label'>Estado</label>
-                  <input
-                    type='text'
-                    className='form-control login__input'
-                    {...register('state', { require: true })}
-                  />
-                </div>
-                <div className='mb-2'>
-                  <label className='form-label login__label'>ZIP</label>
-                  <input
-                    type='text'
-                    className='form-control login__input'
-                    {...register('ZIP', { require: true })}
-                  />
-                </div>
-              </div>
-              <div className='col-md-4 d-flex flex-column align-items-center'>
+           
+              <div className='col-md-6 d-flex flex-column align-items-center'>
                 <div className='col-12'>
-                  {/* <label htmlFor="file-input">
-                  <i class="fa fa-cloud-upload upload-icon card-body" />
-                  <input
-                    id="file-input"
-                    className="d-none"
-                    type="file"
-                    name="upload moto"
-                    {...register("image", { require: true })}
-                  />
-                </label> */}
                 </div>
                 <div className='col-12'>
                   <div className='col-auto'>
@@ -232,7 +195,7 @@ export default function AddRoute ({
                       name='user-message'
                       id='contenido'
                       cols='20'
-                      rows='10'
+                      rows='18'
                       className='form-control border-0'
                       placeholder='Descripción de lugar turístico'
                       {...register('description', { required: true })}

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Grid, _, h } from "gridjs-react";
-import Image from "next/image";
-import { getAllMotos, deleteMoto } from "../../../services/motos/motos";
+import React, { useState, useEffect } from 'react'
+import { Grid, _, h } from 'gridjs-react'
+import Image from 'next/image'
+import { getAllMotos, deleteMoto } from '../../../services/motos/motos'
 import AddMoto from '../Motos/AddMoto'
-import ConfirmModal from "../../ConfirmModal";
-import EditMoto from "./EditMoto";
+import ConfirmModal from '../../ConfirmModal'
+import EditMoto from './EditMoto'
 
 const myLoader = ({ src }) => {
   return `${src}`
@@ -42,14 +42,12 @@ export default function Motos () {
     const token = localStorage.getItem('token')
     try {
       const response = await getAllMotos(token)
-      console.log('res', response);
       const {
         data: { motos }
       } = await response.json()
-      console.log('mot', motos);
       setData(transformDataToRow(motos))
       setMotos(motos)
-    } catch (error) {console.log(error);}
+    } catch (error) {}
   }
   useEffect(() => {
     getMotos()
@@ -85,7 +83,7 @@ export default function Motos () {
 
   return (
     <>
-      <section className='container-fluid bookings'>
+      <section className='container-fluid card-section pt-1 pb-5 bookings'>
         <div className='container'>
           <div className='row'>
             <div className='col-12'>

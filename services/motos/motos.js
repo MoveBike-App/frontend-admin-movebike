@@ -40,7 +40,7 @@ function deleteMoto (token, id) {
   return fetch(URL, options)
 }
 
-function editMoto (token,id, data) {
+function editMoto (token, id, data) {
   const URL = `${URL_BASE}motos/${id}`
   const options = {
     method: 'PATCH',
@@ -49,7 +49,7 @@ function editMoto (token,id, data) {
       headers: {
         'Content-Type': 'application/json',
         Authorization: token,
-        mode:'cors'
+        mode: 'cors'
       }
     }
   }

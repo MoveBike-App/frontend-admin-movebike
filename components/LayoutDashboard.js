@@ -11,7 +11,8 @@ export default function LayoutDashboard ({ children }) {
   return (
     <>
       <Head>
-        <title>MOVEBIKE</title>
+        <title>Admin MoveBike</title>
+        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
       </Head>
       <Script src='https://kit.fontawesome.com/45194397a4.js' crossOrigin='anonymous' />
       <Navbar />
