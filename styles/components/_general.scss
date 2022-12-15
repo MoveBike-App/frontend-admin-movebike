@@ -68,6 +68,35 @@
     border: none;
     max-width: fit-content;
     border-radius: 20px;
+    &--earns{
+        background-color: variables.$gray-background;
+    }
 }
 
 }
+
+.css-1f2kitb-MuiDateRangePickerDay-root {
+    background-color: #FE5F3B !important;
+    border-radius: 50%;
+}
+
+.css-1h14vs8-MuiDateRangePickerDay-root {
+    background-color: #FE5F3B !important;
+    border-radius: 50%;
+}
+
+.css-1m3meum-MuiDateRangePickerDay-root {
+    background-color: #FE5F3B !important;
+    border-radius: 50%;
+}
+
+.MuiPaper-root > div > div:first-child {
+    display: none !important;
+  }
+
+.date-picker-earn-content{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+  

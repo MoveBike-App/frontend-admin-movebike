@@ -13,8 +13,24 @@ function getAllReserves (token) {
   return fetch(URL, options)
 }
 
-function getTopRentalReserves (token) {
-  const URL = `${URL_BASE}reserves/filter`
+function getTopRentalReserves (token, initDate, endDate, operation, size) {
+  let initDateParam = ''
+  let endDateParam = ''
+  let sizeParam = ''
+  let operationParam = ''
+  if (initDate) {
+    initDateParam = initDate
+  }
+  if (endDate) {
+    endDateParam = endDate
+  }
+  if (size) {
+    sizeParam = size
+  }
+  if (operation) {
+    operationParam = operation
+  }
+  const URL = `${URL_BASE}reserves/filter?initialDate=${initDateParam}&finalDate=${endDateParam}&size=${sizeParam}&operation=${operationParam}`
   const options = {
     method: 'GET',
     headers: {

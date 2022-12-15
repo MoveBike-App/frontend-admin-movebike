@@ -42,7 +42,7 @@ export default function Bookings () {
         })
         : 'N/A',
       reserva
-    ])
+    ]).reverse()
 
   const [reserves, setReserves] = useState([])
   const [data, setData] = useState([])
