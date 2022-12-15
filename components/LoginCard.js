@@ -100,22 +100,9 @@ export default function LoginCard () {
                   </p>
                 )}
               </div>
-              <div className='mb-3 ms-1 form-check'>
-                <input
-                  type='checkbox'
-                  className='form-check-input login-card__box'
-                  id='exampleCheck1'
-                />
-                <label
-                  className='form-check-label login-card__checkbox'
-                  htmlFor='exampleCheck1'
-                >
-                  Recuérdame
-                </label>
-              </div>
               <button
                 type='submit'
-                className='btn btn-movebike contained shadow login-card__btn w-100 mb-3'
+                className='btn btn-movebike contained shadow login-card__btn w-100 mb-3 mt-4'
               >
                 Iniciar sesión
               </button>
