@@ -31,8 +31,6 @@ export default function General() {
   };
 
   const today = format(new Date(), "dd/MMM/yyyy");
-  const date = new Date();
-  const strDate = date.toISOString(); // los sgeundo cambian
 
   useEffect(() => {
     getTopRentals();

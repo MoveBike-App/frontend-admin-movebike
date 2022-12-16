@@ -45,8 +45,7 @@ export default function BookDetail ({
                     <p class='mb-0'>
                       {reserve.customer ? reserve.customer.name : 'null'}
                     </p>
-                    <p class='mb-0'>Cancún, Quintana Roo</p>
-                    <p>{reserve.customer ? reserve.customer.location : ''}</p>
+                    <p>{reserve.customer ? reserve.address : ''}</p>
                   </div>
                   <div class='col-md-6 col-xs-12 mb-3'>
                     <h6>Pagó por </h6>
