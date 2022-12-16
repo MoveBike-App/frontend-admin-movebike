@@ -43,9 +43,9 @@ export default function BookDetail ({
                   <div class='col-md-6 col-xs-12 mb-2'>
                     <h6>Detalles de reserva</h6>
                     <p class='mb-0'>
-                      {reserve.customer ? reserve.customer.name : 'null'}
+                      {reserve.customer ? reserve.customer.name : 'MOVEBIKE'}
                     </p>
-                    <p>{reserve.customer ? reserve.address : ''}</p>
+                    <p>{reserve ? reserve.address : 'SUCURSAL' }</p>
                   </div>
                   <div class='col-md-6 col-xs-12 mb-3'>
                     <h6>Pagó por </h6>
