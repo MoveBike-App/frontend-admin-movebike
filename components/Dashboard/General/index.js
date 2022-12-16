@@ -17,6 +17,7 @@ export default function General() {
   const [cancReserves, setCancReserves] = useState([]);
   const [actReserves, setActReserves] = useState([]);
   const [data, setData] = useState([]);
+  const [totalSales, setTotalSales] = useState(0);
 
   const getTopRentals = async () => {
     const token = localStorage.getItem("token");
@@ -47,12 +48,13 @@ export default function General() {
       } = await response.json();
       setData(reserves);
       setReserves(reserves);
+      setTotalSales(getTotalEarns(reserves))
     } catch (error) {}
   };
 
   useEffect(() => {
     getReserves();
-  }, []);
+  }, [totalSales]);
 
   const getActualReserves = async () => {
     const token = localStorage.getItem("token");
@@ -91,6 +93,18 @@ export default function General() {
     getCanceledReserves();
   }, []);
 
+  function add (accumulator, reserve) {
+    return accumulator + reserve.totalPrice
+  }
+
+  function getTotalEarns (reserves) {
+    if (reserves && reserves.length > 0) {
+      return reserves.reduce(add, 0)
+    } else {
+      return 0
+    }
+  }
+
   return (
     <>
       <section className="container-fluid card-section pb-4 text-center text-md-start">
@@ -101,7 +115,7 @@ export default function General() {
               <div className="row mb-2">
                 <div className="col-12 d-flex flex-column flex-md-wrap flex-md-row justify-content-around">
                 <CardAmount
-                    amount={reserves.length}
+                    amount={`$${totalSales}`}
                     title="Ventas totales"
                     icon={<i class="fa fa-usd" aria-hidden="true"></i>}
                   />
